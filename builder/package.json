@@ -3,13 +3,15 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "validate": "node dist/index.js validate"
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "start": "tsx src/index.ts",
+    "validate": "tsx src/index.ts validate"
   },
   "devDependencies": {
     "@types/glob": "^9.0.0",
     "@types/node": "^25.0.10",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
     "typescript": "^5.0.0"
   },
   "dependencies": {

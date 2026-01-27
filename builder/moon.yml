@@ -1,3 +1,11 @@
 type: 'library'
 language: 'typescript'
 platform: 'node'
+
+tasks:
+  build:
+    command: 'tsup src/index.ts --format esm,cjs --dts --clean'
+  start:
+    command: 'tsx src/index.ts'
+  validate:
+    command: 'tsx src/index.ts validate'
