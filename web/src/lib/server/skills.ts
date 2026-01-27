@@ -10,6 +10,25 @@ export interface Skill {
   description: string;
   content: string;
   metadata?: Record<string, any>;
+  assets?: Record<string, string>;
+  references?: Record<string, string>;
+}
+
+function getDirectoryFiles(dirPath: string): Record<string, string> {
+  const files: Record<string, string> = {};
+  if (fs.existsSync(dirPath)) {
+    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.isFile()) {
+        try {
+          files[entry.name] = fs.readFileSync(path.join(dirPath, entry.name), 'utf-8');
+        } catch (e) {
+          console.warn(`Failed to read file ${entry.name} as text`, e);
+        }
+      }
+    }
+  }
+  return files;
 }
 
 export function getSkills(): Skill[] {
@@ -41,7 +60,8 @@ export function getSkills(): Skill[] {
 }
 
 export function getSkillByName(name: string): Skill | null {
-  const skillPath = path.join(SKILLS_DIR, name, 'SKILL.md');
+  const skillDir = path.join(SKILLS_DIR, name);
+  const skillPath = path.join(skillDir, 'SKILL.md');
   
   if (!fs.existsSync(skillPath)) {
     return null;
@@ -50,10 +70,15 @@ export function getSkillByName(name: string): Skill | null {
   const fileContent = fs.readFileSync(skillPath, 'utf-8');
   const { data, content } = matter(fileContent);
 
+  const assets = getDirectoryFiles(path.join(skillDir, 'assets'));
+  const references = getDirectoryFiles(path.join(skillDir, 'references'));
+
   return {
     name: data.name || name,
     description: data.description || '',
     content: marked(content) as string,
-    metadata: data
+    metadata: data,
+    assets,
+    references
   };
 }

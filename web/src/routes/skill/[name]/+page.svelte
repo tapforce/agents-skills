@@ -3,6 +3,7 @@
   import { Badge } from "$lib/components/ui/badge";
   import { Button } from "$lib/components/ui/button";
   import { Separator } from "$lib/components/ui/separator";
+  import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
   import { ArrowLeft } from "lucide-svelte";
 
   let { data }: { data: PageData } = $props();
@@ -47,5 +48,45 @@
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       {@html data.skill.content}
     </div>
+
+    {#if data.skill.assets && Object.keys(data.skill.assets).length > 0}
+      <div class="mt-8">
+        <h2 class="text-2xl font-bold mb-4">Assets</h2>
+        <div class="grid grid-cols-1 gap-4">
+          {#each Object.entries(data.skill.assets) as [filename, content]}
+            <Card>
+              <CardHeader>
+                <CardTitle class="text-lg font-mono">{filename}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div class="bg-muted p-4 rounded-md overflow-x-auto">
+                  <pre class="text-sm font-mono"><code>{content}</code></pre>
+                </div>
+              </CardContent>
+            </Card>
+          {/each}
+        </div>
+      </div>
+    {/if}
+
+    {#if data.skill.references && Object.keys(data.skill.references).length > 0}
+      <div class="mt-8">
+        <h2 class="text-2xl font-bold mb-4">References</h2>
+        <div class="grid grid-cols-1 gap-4">
+          {#each Object.entries(data.skill.references) as [filename, content]}
+            <Card>
+              <CardHeader>
+                <CardTitle class="text-lg font-mono">{filename}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div class="bg-muted p-4 rounded-md overflow-x-auto">
+                  <pre class="text-sm font-mono"><code>{content}</code></pre>
+                </div>
+              </CardContent>
+            </Card>
+          {/each}
+        </div>
+      </div>
+    {/if}
   </div>
 </div>
