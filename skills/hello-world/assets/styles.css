@@ -1,0 +1,13 @@
+/* Example CSS Asset */
+.greeting {
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  padding: 1rem;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+}
+
+.greeting-name {
+  font-weight: bold;
+  color: #007bff;
+}
