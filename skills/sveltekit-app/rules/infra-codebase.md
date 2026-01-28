@@ -57,3 +57,5 @@ References:
 
 - [Install shadcn svelte](https://www.shadcn-svelte.com/docs/installation/sveltekit)
 - [Components](https://www.shadcn-svelte.com/docs/components)
+
+### How to use shadcn svelte library
