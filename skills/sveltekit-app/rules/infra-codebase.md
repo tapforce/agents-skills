@@ -59,3 +59,5 @@ References:
 - [Components](https://www.shadcn-svelte.com/docs/components)
 
 ### How to use shadcn svelte library
+
+Reference rule `code-shadcn-svelte.md`
