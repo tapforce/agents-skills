@@ -18,9 +18,11 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Prefix   |
-| -------- | -------- | -------- |
-| 1        | setup    | `setup-` |
+| Priority | Category | Prefix    | Description                                                       |
+| -------- | -------- | --------- | ----------------------------------------------------------------- |
+| 1        | setup    | `setup-`  | Set up project with base packages, modules, or frameworks.        |
+| 2        | styling  | `style-`  | Practices styling application with Tailwindcss and shadcn-svelte. |
+| 3        | Svelte   | `svelte-` | Practices using Sveltekit features.                               |
 
 ## Quick Reference
 

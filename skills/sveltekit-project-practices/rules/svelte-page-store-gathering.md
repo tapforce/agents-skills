@@ -11,6 +11,7 @@ When page structure become complex with multi component (sibling or nested under
 A store of page (call it `page store`) need satisfy following requirements:
 
 - Store hold all states and derived values that need to be shared cross components within a page.
+- Store instance stored inside Svelte's context feature, with key is `sid` (symbol).
 - Store must binned with page life-cycle, creted when page mount and remove when page unmount.
 - A store must defined as a js class, export for type reference only.
 - Store file must contains 2 functions:
@@ -64,12 +65,14 @@ export class Store {
 ```typescript
 import { setContext } from "svelte";
 
+const sid = Symbol("store");
+
 /* class store define in store.svelte.ts */
 
 // create a new instance of store
 export function createStore() {
   const store = new Store();
-  setContext("store", store);
+  setContext(sid, store);
   return store;
 }
 ```
