@@ -1,10 +1,10 @@
 ---
-title: Use store in components
-description: Guide to use store in effective way.
+title: Keep store at page scope
+description: Prefer use store provider component hold create store instance, separate store logic from page logic.
 tags: sveltekit, svelte5, store
 ---
 
-## Initialize store at page scope
+## Keep store at page scope
 
 - Prefer use store provider component hold create store instance, separate store logic from page logic.
 - Create new svelte component with name `store-provider.svelte` under same folder with the page it binned to.
@@ -42,38 +42,4 @@ tags: sveltekit, svelte5, store
     <h1>Hello World</h1>
   </div>
 </StoreProvider>
-```
-
-## Avoid destructuring store instance in component
-
-- When use store in component, avoid destructuring store instance in component.
-- Assign store instance to a const variable, keep reference from const whenever use properties or methods.
-- Const variable name should match with store name:
-  - `useStore` -> `const store = useStore();`
-  - `useApp` -> `const app = useApp();`
-
-**Incorrect:**
-
-```svelte
-<script>
-  import { useStore } from './store.svelte';
-
-  // destructuring store instance
-  const { count, doubleCount } = useStore();
-</script>
-
-<h1>{count} x 2 = {doubleCount}</h1>
-```
-
-**Correct:**
-
-```svelte
-<script>
-  import { useStore } from './store.svelte';
-
-  // assign store instance to a const variable
-  const store = useStore();
-</script>
-
-<h1>{store.count} x 2 = {store.doubleCount}</h1>
 ```
