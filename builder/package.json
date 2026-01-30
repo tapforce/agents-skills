@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "tsx src/build.ts",
-    "validate": "tsx src/validate.ts"
+    "validate": "tsx src/validate.ts",
+    "compile_agents": "tsx src/compile_agents.ts"
   },
   "devDependencies": {
     "@types/glob": "^9.0.0",
