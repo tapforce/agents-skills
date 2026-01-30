@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
-    "start": "tsx src/index.ts",
-    "validate": "tsx src/index.ts validate"
+    "start": "tsx src/build.ts",
+    "validate": "tsx src/validate.ts"
   },
   "devDependencies": {
     "@types/glob": "^9.0.0",
