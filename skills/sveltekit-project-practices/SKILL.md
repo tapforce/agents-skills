@@ -23,6 +23,7 @@ Reference these guidelines when:
 | 1        | setup    | `setup-`  | Set up project with base packages, modules, or frameworks.        |
 | 2        | styling  | `style-`  | Practices styling application with Tailwindcss and shadcn-svelte. |
 | 3        | Svelte   | `svelte-` | Practices using Sveltekit features.                               |
+| 4        | Abstract | `abs-`    | Abstract practices for Sveltekit project.                         |
 
 ## Quick Reference
 
