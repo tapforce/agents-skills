@@ -4,16 +4,23 @@ description: Review and suggest setup packages base for project development.
 tags: setup, packages
 ---
 
-## SvelteKit
+## Install packages via `pnpm`.
 
-- Reference: https://svelte.dev/docs/kit/creating-a-project
-- Install SvelteKit package via `pnpm`.
-- Install SvelteKit direct to current folder, use command: `pnpx sv create .`.
+always try install project packages via `pnpm`.
+
+- Install SvelteKit packages via `pnpm`. Use command: `pnpm install`.
+- When terminal prompt approve build, suggest developer run `pnpm approve-build`.
+
+## Create environment file
+
 - Create file `.env.local` at root folder of project. Define pair key=value below:
+- Reference: https://svelte.dev/docs/kit/creating-a-project
 
 ```bash
 NODE_ENV=local
 ```
+
+## Create pnpm workspace file
 
 - Create file `pnpm-workspace.yaml` at root folder of project. Define content below:
 
@@ -21,9 +28,6 @@ NODE_ENV=local
 packages:
   - "."
 ```
-
-- Install SvelteKit packages via `pnpm`. Use command: `pnpm install`.
-- When terminal prompt approve build, suggest developer run `pnpm approve-build`.
 
 ## Tailwindcss
 
