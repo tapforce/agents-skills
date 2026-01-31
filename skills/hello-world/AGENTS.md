@@ -25,9 +25,7 @@ We also have TypeScript definitions in [references/types.ts](references/types.ts
 - Template: [assets/template.txt](assets/template.txt)
 - Styles: [assets/styles.css](assets/styles.css)
 
-
 ---
-# File: scripts/greet.js
 #!/usr/bin/env node
 
 const args = process.argv.slice(2);
@@ -37,7 +35,6 @@ console.log(`Hello, ${name}!`);
 console.log('This is a JavaScript script example.');
 
 ---
-# File: references/types.ts
 /**
  * Example TypeScript Definition
  */
@@ -55,7 +52,6 @@ export interface SkillConfig {
 }
 
 ---
-# File: references/api.md
 # Hello World API Reference
 
 ## Commands
@@ -75,12 +71,10 @@ python3 scripts/hello.py Alice
 ```
 
 ---
-# File: assets/template.txt
 Hello, {{name}}!
 Welcome to the {{project}} project.
 
 ---
-# File: assets/styles.css
 /* Example CSS Asset */
 .greeting {
   color: #333;

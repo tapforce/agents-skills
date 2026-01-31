@@ -19,12 +19,17 @@ ENABLE_EXPERIMENTAL_COREPACK=1 # Enable corepack to use pnpm as main package man
 
 ## set pnpm version on package.json
 
-Check, update, or adding `pnpm` version requirement to `package.json` file. Version added on `package.json` must match with verson installed.
+Check, update, or adding `pnpm` version requirement to `package.json` file. Version added on `package.json` must at least from version `10.2.0`.
+
+Optional: define node version >= 20.0.0 in `package.json` file.
 
 **Example**
 
 ```json
 {
-  "packageManager": "pnpm@10.x"
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.2.0"
+  }
 }
 ```

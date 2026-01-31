@@ -47,13 +47,10 @@ Each rule file contains:
 
 For the complete guide with all rules expanded: `AGENTS.md`
 
+---
+# Use store within other store | File: rules/svelte-use-store-within-store.md
 
----
-# File: rules/svelte-use-store-within-store.md
----
-title: Use store within other store
-description: Practice use a store inside sub-store in svelte.
----
+Practice use a store inside sub-store in svelte.
 
 When need use variable or method from a store from inside current store, need:
 
@@ -79,12 +76,11 @@ export const createStore = (app?: App) => {
 }
 ```
 ---
-# File: rules/svelte-use-runes.md
----
-title: Use runes mode in svelte 5
-description: Guide to use runes correct way in Svelte 5.
-tags: sveltekit, svelte5, runes
----
+# Use runes mode in svelte 5 | File: rules/svelte-use-runes.md
+
+Guide to use runes correct way in Svelte 5.
+
+sveltekit, svelte5, runes
 
 ## Always use runes mode in svelte 5
 
@@ -119,14 +115,12 @@ tags: sveltekit, svelte5, runes
 ## Reference
 
 - https://svelte.dev/blog/runes
+---
+# Avoid destructuring store instance in component | File: rules/svelte-undestructuring-store.md
 
----
-# File: rules/svelte-undestructuring-store.md
----
-title: Avoid destructuring store instance in component
-description: When use store in component, avoid destructuring store instance in component. Assign store instance to a const variable, keep reference from const whenever use properties or methods.
-tags: sveltekit, store, practice
----
+When use store in component, avoid destructuring store instance in component. Assign store instance to a const variable, keep reference from const whenever use properties or methods.
+
+sveltekit, store, practice
 
 - When use store in component, avoid destructuring store instance in component.
 - Assign store instance to a const variable, keep reference from const whenever use properties or methods.
@@ -159,14 +153,12 @@ tags: sveltekit, store, practice
 
 <h1>{store.count} x 2 = {store.doubleCount}</h1>
 ```
+---
+# Gathering data under store of page | File: rules/svelte-page-store-gathering.md
 
----
-# File: rules/svelte-page-store-gathering.md
----
-title: Gathering data under store of page
-description: Guide to write and manage data sharing cross components within a page or shared cross multi level of page in svelte.
-tags: sveltekit, svelte5, runes, store, data-gathering
----
+Guide to write and manage data sharing cross components within a page or shared cross multi level of page in svelte.
+
+sveltekit, svelte5, runes, store, data-gathering
 
 ## Gether state and derived values into store life witin page lifecycle
 
@@ -289,14 +281,12 @@ When a store must shared cross multi level of page, ex: application store, authe
   - `createApp` for `app.svelte.ts`
   - `createAuth` for `auth.svelte.ts`
   - `createAcl` for `acl.svelte.ts`
+---
+# Keep store at page scope | File: rules/svelte-keep-store-within-page.md
 
----
-# File: rules/svelte-keep-store-within-page.md
----
-title: Keep store at page scope
-description: Prefer use store provider component hold create store instance, separate store logic from page logic.
-tags: sveltekit, svelte5, store
----
+Prefer use store provider component hold create store instance, separate store logic from page logic.
+
+sveltekit, svelte5, store
 
 ## Keep store at page scope
 
@@ -337,14 +327,12 @@ tags: sveltekit, svelte5, store
   </div>
 </StoreProvider>
 ```
+---
+# Use svelte class value (array) for define long, complex class name | File: rules/svelte-condition-class.md
 
----
-# File: rules/svelte-condition-class.md
----
-title: Use svelte class value (array) for define long, complex class name
-description: Use array to store multi lines of css class when need define long, condition class name in html.
-tags: sveltekit, svelte5, class, style
----
+Use array to store multi lines of css class when need define long, condition class name in html.
+
+sveltekit, svelte5, class, style
 
 - Always use array to store condition class attribute in svelte component.
 - each condition take one line in array.
@@ -368,14 +356,12 @@ tags: sveltekit, svelte5, class, style
 ]}>
 </div>
 ```
+---
+# Define props in svelte 5 component | File: rules/svelte-component-props-define.md
 
----
-# File: rules/svelte-component-props-define.md
----
-title: Define props in svelte 5 component
-description: Guide correct way to define props in svelte 5 component.
-tags: sveltekit, svelte5, props, component
----
+Guide correct way to define props in svelte 5 component.
+
+sveltekit, svelte5, props, component
 
 ## Define props in svelte 5 component
 
@@ -414,14 +400,12 @@ tags: sveltekit, svelte5, props, component
 
 {@render children()}
 ```
+---
+# Break long class attribute to multi line | File: rules/svelte-break-long-class-attr.md
 
----
-# File: rules/svelte-break-long-class-attr.md
----
-title: Break long class attribute to multi line
-description: use svelte 5 feature to break long string class attribute html to multi line via array
-tags: sveltekit, svelte5, class, style
----
+use svelte 5 feature to break long string class attribute html to multi line via array
+
+sveltekit, svelte5, class, style
 
 ## break long class attribute to multi line
 
@@ -448,14 +432,12 @@ tags: sveltekit, svelte5, class, style
 ```
 
 Reference: https://svelte.dev/docs/svelte/class
+---
+# Use `@utility` block when need define custom class | File: rules/style-use-tailwindcss-utility-block.md
 
----
-# File: rules/style-use-tailwindcss-utility-block.md
----
-title: Use `@utility` block when need define custom class
-description: Guide correct way to make style application with Tailwindcss and it's classes.
-tags: sveltekit, svelte5, tailwindcss, styling
----
+Guide correct way to make style application with Tailwindcss and it's classes.
+
+sveltekit, svelte5, tailwindcss, styling
 
 ## Use `@utility` block when need define custom class
 
@@ -471,14 +453,12 @@ When need to define custom class, following instruction of tailwindcss version 4
 
 /* use .text-lead to apply style */
 ```
+---
+# Define global custom style within `@layer base` | File: rules/style-define-custom-global-css.md
 
----
-# File: rules/style-define-custom-global-css.md
----
-title: Define global custom style within `@layer base`
-description: Guide correct way to make style application with Tailwindcss and it's classes.
-tags: sveltekit, svelte5, tailwindcss, styling
----
+Guide correct way to make style application with Tailwindcss and it's classes.
+
+sveltekit, svelte5, tailwindcss, styling
 
 ## Define global custom style within `@layer base`
 
@@ -494,12 +474,11 @@ When need to define global custom style, following instruction of tailwindcss ve
 }
 ```
 ---
-# File: rules/style-common-tailwindcss-usage.md
----
-title: Common Tailwindcss Usage
-description: Common tailwindcss usage that must follow tailwind version 4.
-tags: sveltekit, svelte5, tailwindcss, styling
----
+# Common Tailwindcss Usage | File: rules/style-common-tailwindcss-usage.md
+
+Common tailwindcss usage that must follow tailwind version 4.
+
+sveltekit, svelte5, tailwindcss, styling
 
 ## All tailwindcss configuration must following tailwind version 4
 
@@ -527,14 +506,12 @@ If project implemented shadcn library, add style default cursor-pointer to butto
 - Reference: https://tailwindcss.com/docs/styling-with-utility-classes#using-arbitrary-values
 - Reference: https://tailwindcss.com/docs/adding-custom-styles#arbitrary-properties
 - Reference: https://tailwindcss.com/docs/adding-custom-styles#arbitrary-variants
+---
+# use svelte snippet with shadcn component | File: rules/shadcn-use-snippet.md
 
----
-# File: rules/shadcn-use-snippet.md
----
-title: use svelte snippet with shadcn component
-description: Use svelte snippet (svelte 5 feature) with shadcn component to avoid duplicate code.
-tags: sveltekit, shadcn, snippet
----
+Use svelte snippet (svelte 5 feature) with shadcn component to avoid duplicate code.
+
+sveltekit, shadcn, snippet
 
 Use svelte snippet (svelte 5 feature) with shadcn component to avoid duplicate code. Make sure you installed shadcn svelte version support Svelte 5.
 
@@ -553,26 +530,22 @@ Use svelte snippet (svelte 5 feature) with shadcn component to avoid duplicate c
   {/snippet}
  </DropdownMenu.Trigger>
 ```
+---
+# Unchange shadcn components code | File: rules/shadcn-untouch-components.md
 
----
-# File: rules/shadcn-untouch-components.md
----
-title: Unchange shadcn components code
-description: Never change shadcn components code, keep them origin as it is to support update/overwrite when shadcn release new version.
-tags: sveltekit, shadcn, components
----
+Never change shadcn components code, keep them origin as it is to support update/overwrite when shadcn release new version.
+
+sveltekit, shadcn, components
 
 ## Avoid change code of shadcn components
 
 When shadcn component installed to project, never change their code, keep them origin as it is to support update/overwrite when shadcn release new version.
+---
+# Consistent Shadcn Style Guide | File: rules/shadcn-style-consistent.md
 
----
-# File: rules/shadcn-style-consistent.md
----
-title: Consistent Shadcn Style Guide
-description: Keep shadcn's style consistent with project's style guide.
-tags: sveltekit, shadcn, style
----
+Keep shadcn's style consistent with project's style guide.
+
+sveltekit, shadcn, style
 
 After install Shadcn svelte to project, it shipped with default style defined in `/src/routes/layout.css`. Depend on project requirement, you can override the style include:
 
@@ -604,16 +577,12 @@ ex:
 .dark {
     --foreground: oklch(0.985 1 1);
 }
-
-
-
 ---
-# File: rules/setup-tools.md
----
-title: Setup tools
-description: Review and suggest setup tools for project development.
-tags: setup, tools
----
+# Setup tools | File: rules/setup-tools.md
+
+Review and suggest setup tools for project development.
+
+setup, tools
 
 ## Node.js
 
@@ -637,15 +606,12 @@ tags: setup, tools
 - When application required setup following mono-repo structure, developer must install MoonRepo package manager.
 - Reference: https://moonrepo.dev/docs/install
 - Choose install MoonRepo via `pnpm`: https://moonrepo.dev/docs/install#npm
+---
+# Set up SvelteKit Framework for New Project | File: rules/setup-sveltekit.md
 
+Step by step set up SvelteKit framework to a folder as base for new project.
 
----
-# File: rules/setup-sveltekit.md
----
-title: Set up SvelteKit Framework for New Project
-description: Step by step set up SvelteKit framework to a folder as base for new project.
-tags: sveltekit, framework, setup, infrastructure
----
+sveltekit, framework, setup, infrastructure
 
 ## Use common, extractly command to install SvelteKit.
 
@@ -653,12 +619,11 @@ tags: sveltekit, framework, setup, infrastructure
 - Sveltekit should installed to current folder, not create new sub-folder for project.
 - Dont append more arguments to command, keep use correct command: `pnpx sv create .`.
 ---
-# File: rules/setup-packages-base.md
----
-title: Setup packages base
-description: Review and suggest setup packages base for project development.
-tags: setup, packages
----
+# Setup packages base | File: rules/setup-packages-base.md
+
+Review and suggest setup packages base for project development.
+
+setup, packages
 
 ## Install packages via `pnpm`.
 
@@ -711,14 +676,12 @@ packages:
 
 - Reference: https://www.npmjs.com/package/tiny-invariant
 - Install tiny-invariant package via `pnpm`. Use command: `pnpm add -D tiny-invariant`.
+---
+# Validate truly value | File: rules/code-predict-truly.md
 
----
-# File: rules/code-predict-truly.md
----
-title: Validate truly value
-description: Guide to validate a value predict truly in code.
-tags: typescript, exception, error, validate, tiny-invariant, truly
----
+Guide to validate a value predict truly in code.
+
+typescript, exception, error, validate, tiny-invariant, truly
 
 ## use tiny-invariant for check and throw exception/Error
 
@@ -750,4 +713,3 @@ function divide(a: number, b: number): number {
 ## Reference:
 
 - https://www.npmjs.com/package/tiny-invariant
-

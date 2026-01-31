@@ -23,12 +23,4 @@ Skill separated to rules under `./rules` with prefix, following priority:
 Each rules have own name, description, and tags.
 Rule can include **Incorrect**, **Correct**, or **Example** code block.
 
-Rules:
-
-- `pr-01-setup`: Initialize pnpm in the project root
-- `pr-02-workspace`: Configure pnpm-workspace.yaml for monorepo
-- `pr-03-lockfile`: Ensure pnpm-lock.yaml is committed to version control
-- `pl-01-strict`: Always use pnpm install --frozen-lockfile in CI
-- `pl-02-filter`: Use pnpm --filter to run scripts in specific workspace packages
-
 Full version of skill and rules represent with file AGENTS.md.

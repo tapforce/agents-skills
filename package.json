@@ -9,5 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.2.0"
+  },
   "packageManager": "pnpm@10.2.0"
 }
