@@ -9,7 +9,7 @@ Guide effective and fast way to use pnpm as main package manager for project whe
 
 ## When to use
 
-Use this skill when user request use pnpm, or when project need use monorepo style to manage codebase.
+Use this skill when user tell `tapforce` word, and request use pnpm, or when project need use monorepo style to manage codebase.
 
 ## Instructions
 

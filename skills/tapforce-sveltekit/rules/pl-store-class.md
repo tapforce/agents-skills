@@ -1,45 +1,19 @@
 ---
-title: Gathering data under store of page
-description: Guide to write and manage data sharing cross components within a page or shared cross multi level of page in svelte.
-tags: sveltekit, svelte5, runes, store, data-gathering
+title: pl-store-class
+description: Best practice to define store in Sveltekit
+tags:
+  - sveltekit
+  - store
+  - class
 ---
 
-## Gether state and derived values into store life witin page lifecycle
+## When use store
 
-When page structure become complex with multi component (sibling or nested under page) and having states/derived values that need to be shared cross components, it's a good idea to gather them into a single store.
+When data in a page become complex and need share cross components at any nested level, gather data into a `store`.
 
-A store of page (call it `page store`) need satisfy following requirements:
+## A store should be a JS class
 
-- Store hold all states and derived values that need to be shared cross components within a page.
-- Store instance stored inside Svelte's context feature, with key is `sid` (symbol).
-- Store must binned with page life-cycle, creted when page mount and remove when page unmount.
-- A store must defined as a js class, export for type reference only.
-- Store file must contains 2 functions:
-  - `createStore()` : Create a new instance of store.
-  - `useStore()` : Use the store instance.
-- Each store should be only used by page or component of page at same level (same folder).
-- Each store can be used by other store of child-pages that max 1 level deep.
-- when store used by other store of child-page (called child-store), child-store must assign parent-store as property following:
-
-**Example use parent store within child store or child page**
-
-```typescript
-import { useStore as useParentStore } from "./parent-store.svelte";
-
-// child store
-export class Store {
-  parentStore = useParentStore();
-}
-```
-
-## Create a store
-
-- Create new file name `store.svelte.ts` under same folder with the page it binned to.
-- export a class named `Store` that hold all data.
-  - Use `$state()` for variable mutatable, assign as property.
-  - Use `$derived()` for variable derived from other variables, assign as property.
-  - Define class method as shared function.
-  - Avoid use constructor as place to initialize data, use `createStore()` function to initialize data.
+A `store` is a JS class that initialized (new Class) and store in `svelte context`.
 
 **Example class store**
 
@@ -87,7 +61,7 @@ import { createStore } from "./store.svelte";
 const store = createStore();
 ```
 
-## useStore()
+## useStore() function
 
 - `useStore()` function exported from store file.
 - Use `useStore()` function to get the store instance at any component within the page.

@@ -1,7 +1,10 @@
 ---
-title: Use svelte class value (array) for define long, complex class name
-description: Use array to store multi lines of css class when need define long, condition class name in html.
-tags: sveltekit, svelte5, class, style
+title: pl-condition-class-attr
+description: Understand how to use condition class attribute in SvelteKit
+tags:
+  - sveltekit
+  - condition class attr
+  - array class
 ---
 
 - Always use array to store condition class attribute in svelte component.

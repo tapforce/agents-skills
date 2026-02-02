@@ -1,10 +1,14 @@
 ---
-title: Use runes mode in svelte 5
-description: Guide to use runes correct way in Svelte 5.
-tags: sveltekit, svelte5, runes
+title: pl-reactive-variable
+description: Understand how to use reactive variable in SvelteKit
+tags:
+  - sveltekit
+  - reactive-variable
+  - $state
+  - $derived
 ---
 
-## Always use runes mode in svelte 5
+## always use $state and $derived to define reactive variable
 
 - Use Rune mode for reactive variables whenever possible.
 - Avoid using `$:` prefix for reactive variables.
