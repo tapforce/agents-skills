@@ -7,7 +7,17 @@ description: Practices to use consistent shadcn components
 
 **CRITICAL**: AVOID modify Shadcn components as much as possible. Keep in mind there components should be update/override easily when Shadcn update new version.
 
-**CRITICAL**: When importing shadcn components in Svelte, ALWAYS use namespace import pattern: `import * as Component from '$lib/components/ui/component'`
+**CRITICAL**: When importing shadcn components in Svelte, use one of these patterns:
+
+**Option 1 - Namespace import (recommended for components with multiple parts)**:
+```typescript
+import * as Card from '$lib/components/ui/card/index';
+```
+
+**Option 2 - Individual component import**:
+```typescript
+import { Card } from '$lib/components/ui/card/index';
+```
 
 **Incorrect**: 
 ```typescript
@@ -16,13 +26,27 @@ import Button from '$lib/components/ui/button.svelte';
 import Dialog from '$lib/components/ui/dialog.svelte';
 ```
 
-**Correct**:
+**Usage with namespace imports**:
+When using `import * as Component`, you MUST use the Root component explicitly:
 ```typescript
-import * as Card from '$lib/components/ui/card';
-import * as Button from '$lib/components/ui/button';
-import * as Dialog from '$lib/components/ui/dialog';
+// Correct
+<Card.Root>
+  <Card.Content>Content</Card.Content>
+</Card.Root>
+
+// Incorrect
+<Card>
+  <Card.Content>Content</Card.Content>
+</Card>
 ```
 
-This allows access to all exported parts of any component (Card.Content, Button.Root, Dialog.Content, etc.) as namespace properties.
+**Usage with individual imports**:
+When using `import { Component }`, use the component directly:
+```typescript
+// Correct
+<Card>
+  <Card.Content>Content</Card.Content>
+</Card>
+```
 
-**Reason**: shadcn components export multiple parts (Root, Content, Header, Footer, Trigger, etc.) as named exports, not as default exports. The namespace import pattern captures all exports under a single namespace object for any component type.
+**Reason**: shadcn components export multiple parts (Root, Content, Header, Footer, Trigger, etc.) as named exports. The namespace import pattern captures all exports under a single namespace object, but requires using Component.Root for the main component. Individual imports provide direct access to the main component.
