@@ -1,5 +1,5 @@
 ---
-title: pl-store-class
+name: pl-store-class
 description: Best practice to define store in Sveltekit
 tags:
   - sveltekit

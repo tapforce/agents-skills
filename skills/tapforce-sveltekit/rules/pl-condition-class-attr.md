@@ -1,5 +1,5 @@
 ---
-title: pl-condition-class-attr
+name: pl-condition-class-attr
 description: Understand how to use condition class attribute in SvelteKit
 tags:
   - sveltekit

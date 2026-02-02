@@ -1,5 +1,5 @@
 ---
-title: pr-setup
+name: pr-setup
 description: Steps and practices to prepare project to use SvelteKit.
 tags:
   - sveltekit

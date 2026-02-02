@@ -1,5 +1,5 @@
 ---
-title: pl-reactive-variable
+name: pl-reactive-variable
 description: Understand how to use reactive variable in SvelteKit
 tags:
   - sveltekit

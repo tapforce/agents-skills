@@ -1,7 +1,10 @@
 ---
-title: Consistent Shadcn Style Guide
+name: pl-style-consistent
 description: Keep shadcn's style consistent with project's style guide.
-tags: sveltekit, shadcn, style
+tags:
+  - sveltekit
+  - shadcn
+  - style
 ---
 
 After install Shadcn svelte to project, it shipped with default style defined in `/src/routes/layout.css`. Depend on project requirement, you can override the style include:

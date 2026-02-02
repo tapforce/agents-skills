@@ -1,7 +1,13 @@
 ---
-title: Validate truly value
+name: pl-predict-truly
 description: Guide to validate a value predict truly in code.
-tags: typescript, exception, error, validate, tiny-invariant, truly
+tags:
+  - typescript
+  - exception
+  - error
+  - validate
+  - tiny-invariant
+  - truly
 ---
 
 ## use tiny-invariant for check and throw exception/Error

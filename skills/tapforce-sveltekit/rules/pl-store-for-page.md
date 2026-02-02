@@ -1,5 +1,5 @@
 ---
-title: pl-store-for-page
+name: pl-store-for-page
 description: use store to serve single page
 ---
 

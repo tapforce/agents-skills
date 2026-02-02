@@ -1,5 +1,5 @@
 ---
-title: pl-undestructuring-store
+name: pl-undestructuring-store
 description: avoid destructuring store instance
 tags:
   - sveltekit

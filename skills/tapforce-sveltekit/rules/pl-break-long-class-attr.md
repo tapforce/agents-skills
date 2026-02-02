@@ -1,5 +1,5 @@
 ---
-title: pl-break-long-class-attr
+name: pl-break-long-class-attr
 description: Understand how to break long class attribute to multi line in SvelteKit
 tags:
   - sveltekit

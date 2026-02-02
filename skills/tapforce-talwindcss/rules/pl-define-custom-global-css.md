@@ -1,7 +1,11 @@
 ---
-title: Define global custom style within `@layer base`
+name: pl-define-custom-global-css
 description: Guide correct way to make style application with Tailwindcss and it's classes.
-tags: sveltekit, svelte5, tailwindcss, styling
+tags:
+  - sveltekit
+  - svelte5
+  - tailwindcss
+  - styling
 ---
 
 ## Define global custom style within `@layer base`

@@ -1,7 +1,10 @@
 ---
-title: use svelte snippet with shadcn component
+name: pl-use-snippet
 description: Use svelte snippet (svelte 5 feature) with shadcn component to avoid duplicate code.
-tags: sveltekit, shadcn, snippet
+tags:
+  - sveltekit
+  - shadcn
+  - snippet
 ---
 
 Use svelte snippet (svelte 5 feature) with shadcn component to avoid duplicate code. Make sure you installed shadcn svelte version support Svelte 5.

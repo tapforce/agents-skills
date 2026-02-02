@@ -1,7 +1,11 @@
 ---
-title: Common Tailwindcss Usage
+name: pl-common-tailwindcss-usage
 description: Common tailwindcss usage that must follow tailwind version 4.
-tags: sveltekit, svelte5, tailwindcss, styling
+tags:
+  - sveltekit
+  - svelte5
+  - tailwindcss
+  - styling
 ---
 
 ## All tailwindcss configuration must following tailwind version 4

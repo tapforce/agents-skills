@@ -1,5 +1,5 @@
 ---
-title: pr-version
+name: pr-version
 description: Understand what oldest Sveltekit version should be supported
 tags:
   - sveltekit

@@ -1,7 +1,11 @@
 ---
-title: Use `@utility` block when need define custom class
+name: pl-utility-block
 description: Guide correct way to make style application with Tailwindcss and it's classes.
-tags: sveltekit, svelte5, tailwindcss, styling
+tags:
+  - sveltekit
+  - svelte5
+  - tailwindcss
+  - styling
 ---
 
 ## Use `@utility` block when need define custom class

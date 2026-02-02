@@ -1,7 +1,10 @@
 ---
-title: Unchange shadcn components code
+name: pl-untouch-components
 description: Never change shadcn components code, keep them origin as it is to support update/overwrite when shadcn release new version.
-tags: sveltekit, shadcn, components
+tags:
+  - sveltekit
+  - shadcn
+  - components
 ---
 
 ## Avoid change code of shadcn components
