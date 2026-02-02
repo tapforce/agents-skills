@@ -7,46 +7,60 @@ description: Practices to use consistent shadcn components
 
 **CRITICAL**: AVOID modify Shadcn components as much as possible. Keep in mind there components should be update/override easily when Shadcn update new version.
 
-**CRITICAL**: When importing shadcn components in Svelte, use one of these patterns:
+**CRITICAL**: When importing shadcn components in Svelte, the project MUST use the following pattern:
 
-**Option 1 - Namespace import (recommended for components with multiple parts)**:
+**REQUIRED IMPORT PATTERN**:
 ```typescript
-import * as Card from '$lib/components/ui/card/index';
+import { ComponentName } from '$lib/components/ui/component/index';
 ```
 
-**Option 2 - Individual component import**:
+**Examples**:
 ```typescript
 import { Card } from '$lib/components/ui/card/index';
+import { Button } from '$lib/components/ui/button/index';
+import { Dialog } from '$lib/components/ui/dialog/index';
+import { Input } from '$lib/components/ui/input/index';
 ```
 
-**Incorrect**: 
+**STRICTLY FORBIDDEN PATTERNS**:
+
+❌ **NEVER use namespace imports**:
 ```typescript
-import Card from '$lib/components/ui/card.svelte';
-import Button from '$lib/components/ui/button.svelte';
-import Dialog from '$lib/components/ui/dialog.svelte';
+import * as Card from '$lib/components/ui/card/index';  // FORBIDDEN
 ```
 
-**Usage with namespace imports**:
-When using `import * as Component`, you MUST use the Root component explicitly:
+❌ **NEVER import individual Svelte files**:
 ```typescript
-// Correct
-<Card.Root>
-  <Card.Content>Content</Card.Content>
-</Card.Root>
+import Card from '$lib/components/ui/card.svelte';     // FORBIDDEN
+import Button from '$lib/components/ui/button.svelte';  // FORBIDDEN
+```
 
-// Incorrect
+❌ **NEVER use wildcard imports**:
+```typescript
+import * as Components from '$lib/components/ui/card/index';  // FORBIDDEN
+```
+
+**COMPONENT USAGE**:
+When using the required import pattern, components can be used directly:
+```typescript
+// Correct usage
 <Card>
   <Card.Content>Content</Card.Content>
+  <Card.Header>Header</Card.Header>
+  <Card.Footer>Footer</Card.Footer>
 </Card>
+
+<Button>Click me</Button>
+<Dialog>
+  <Dialog.Trigger>Open</Dialog.Trigger>
+  <Dialog.Content>Dialog content</Dialog.Content>
+</Dialog>
 ```
 
-**Usage with individual imports**:
-When using `import { Component }`, use the component directly:
-```typescript
-// Correct
-<Card>
-  <Card.Content>Content</Card.Content>
-</Card>
-```
+**ENFORCEMENT**: This import pattern is strictly enforced across the entire project to maintain:
+- Consistent component usage
+- Proper tree-shaking
+- Clear dependency tracking
+- Simplified component management
 
-**Reason**: shadcn components export multiple parts (Root, Content, Header, Footer, Trigger, etc.) as named exports. The namespace import pattern captures all exports under a single namespace object, but requires using Component.Root for the main component. Individual imports provide direct access to the main component.
+**REASON**: The `import { Component } from '.../index'` pattern provides direct access to the main component while maintaining access to all sub-components (Content, Header, Footer, Trigger, etc.) as named exports. This approach avoids the complexity of namespace imports while preventing direct file imports that break component abstraction.
