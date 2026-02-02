@@ -23,6 +23,29 @@ If project is new or empty (not install any framework before), we prefer to use 
 
 In monorepo setup, the Mastra project will be `application`, NOT `package`.
 
+## Create new Mastra application
+
+**For new projects in monorepo**: ALWAYS use `pnpm create mastra@latest [app-name]`
+
+**Correct Process**:
+```bash
+# Navigate to apps directory
+cd apps/
+
+# Create new Mastra application
+pnpm create mastra@latest [app-name]
+
+# The CLI will handle:
+# - Interactive setup (provider selection, API key)
+# - Dependency installation
+# - Project structure creation
+# - Mastra CLI installation
+```
+
+**Incorrect**: Manual npm init, manual dependency installation, or manual file creation.
+
+**Reason**: The Mastra CLI handles complex setup including provider configuration, environment setup, and proper project structure that manual setup cannot replicate.
+
 ## Install to exist project
 
 If project is not empty and installed one of base frameworks, install mastra following correct guideline from official site.
