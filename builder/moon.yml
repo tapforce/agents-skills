@@ -5,9 +5,13 @@ platform: "node"
 tasks:
   build:
     command: "tsup src/index.ts --format esm,cjs --dts --clean"
+    local: true
   start:
     command: "tsx src/index.ts"
+    local: true
   validate:
     command: "tsx src/index.ts validate"
+    local: true
   compile_agents:
     command: "tsx src/compile_agents.ts"
+    local: true
