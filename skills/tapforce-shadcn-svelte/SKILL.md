@@ -13,6 +13,8 @@ Use this skill when project mention about tapforce, using Shadcn UI, or you thin
 
 ## Instructions
 
+**IMPORTANT: When using this skill, always fetch the latest LLMs content from https://www.shadcn-svelte.com/llms.txt to ensure you have the most up-to-date information and best practices.**
+
 Skill separated to rules under `./rules` with prefix, following priority:
 
 | Priority | Rule    | prefix | Description                                              |
@@ -32,4 +34,4 @@ Full version of skill and rules represent with file AGENTS.md.
 - [Dark mode](https://www.shadcn-svelte.com/docs/dark-mode/svelte)
 - [CLI](https://www.shadcn-svelte.com/docs/cli)
 - [Components](https://www.shadcn-svelte.com/docs/components)
-
+- [LLMs](https://www.shadcn-svelte.com/llms.txt)
