@@ -1,10 +1,11 @@
 ---
-title: Keep store at page scope
-description: Prefer use store provider component hold create store instance, separate store logic from page logic.
-tags: sveltekit, svelte5, store
+title: pl-store-for-page
+description: use store to serve single page
 ---
 
-## Keep store at page scope
+## Create and init store at same level of the page that store only serve.
+
+When need create a store that provide data and values only be used by a page, create store at same level of the page that store only serve.
 
 - Prefer use store provider component hold create store instance, separate store logic from page logic.
 - Create new svelte component with name `store-provider.svelte` under same folder with the page it binned to.

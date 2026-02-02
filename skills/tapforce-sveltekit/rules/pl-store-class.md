@@ -15,6 +15,13 @@ When data in a page become complex and need share cross components at any nested
 
 A `store` is a JS class that initialized (new Class) and store in `svelte context`.
 
+- Create new file name `store.svelte.ts` under same folder with the page it binned to.
+- export a class named `Store` that hold all data.
+- Use `$state()` for variable mutatable, assign as property.
+- Use `$derived()` for variable derived from other variables, assign as property.
+- Define class method as shared function.
+- Avoid use constructor as place to initialize data, use `createStore()` function to initialize data.
+
 **Example class store**
 
 ```typescript
