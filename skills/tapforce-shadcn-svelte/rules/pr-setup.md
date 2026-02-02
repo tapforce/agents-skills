@@ -8,7 +8,21 @@ tags:
 
 ## Init shadcn on the project
 
-**CRITICAL**: use command: `pnpm dlx shadcn-svelte@latest init` to start init shadcn ui on the project.
+**CRITICAL**: **NEVER** install shadcn manually. **ALWAYS** use command: `pnpm dlx shadcn-svelte@latest init` to start init shadcn ui on the project.
+
+**FORBIDDEN**: Do NOT manually:
+- Install packages with `pnpm add`
+- Create `tailwind.config.js` files
+- Manually add CSS variables to HTML
+- Create `components.json` manually
+- Create `lib/utils.ts` manually
+
+The CLI init command handles ALL configuration automatically including:
+- Tailwind CSS v4 setup
+- CSS variables configuration  
+- Component aliases
+- Utility functions
+- Dependencies installation
 
 ## Remember shadcn version instead of `latest`
 
