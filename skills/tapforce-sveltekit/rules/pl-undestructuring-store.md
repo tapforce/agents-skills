@@ -1,7 +1,10 @@
 ---
-title: Avoid destructuring store instance in component
-description: When use store in component, avoid destructuring store instance in component. Assign store instance to a const variable, keep reference from const whenever use properties or methods.
-tags: sveltekit, store, practice
+title: pl-undestructuring-store
+description: avoid destructuring store instance
+tags:
+  - sveltekit
+  - svelte5
+  - store
 ---
 
 - When use store in component, avoid destructuring store instance in component.

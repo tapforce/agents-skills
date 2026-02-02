@@ -1,7 +1,11 @@
 ---
-title: Define props in svelte 5 component
+name: pl-use-component-props
 description: Guide correct way to define props in svelte 5 component.
-tags: sveltekit, svelte5, props, component
+tags:
+  - sveltekit
+  - svelte5
+  - props
+  - component
 ---
 
 ## Define props in svelte 5 component

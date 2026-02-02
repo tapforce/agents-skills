@@ -1,15 +1,17 @@
 ---
 name: tapforce-monorepo
-description: Skill use Moon Repo tools to manage mono repo in Tapforce project
+description: Practices use Moon Repo tools to manage mono-repo project in Tapforce
 ---
 
 # tapforce-monorepo
 
-Collection of skills and rules to use Moon Repo tools to manage mono repo in Tapforce project
+Provide good way and practices to manage and develop mono-repo projects in Tapforce company. This skill prefer use `Moon Repo` as main monorepo management tool.
+
+Information about tool can be found in [Moon Repo documentation](https://moonrepo.dev/docs/install).
 
 ## When to use
 
-Use this skills when you need manage mono repo project in Tapforce company. Choose if user specify `tapforce` in request, and project need use monorepo structure.
+Use this skill when project mention or related to Tapforce, and required by user or you think project complex enough to use monorepo structure.
 
 ## Instructions
 
