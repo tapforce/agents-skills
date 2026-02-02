@@ -15,3 +15,6 @@ tasks:
   compile_agents:
     command: "tsx src/compile_agents.ts"
     local: true
+  clean_agents:
+    command: "tsx src/clean_agents.ts"
+    local: true
