@@ -68,12 +68,25 @@ pnpm, env, prepare
 
 ## Add `pnpm-workspace.yaml`
 
-Add or update `pnpm-workspace.yaml` file at root of project. Add all packages in project to workspace if file not exist or file has not `packages` section.
+**CRITICAL**: Always create `pnpm-workspace.yaml` file at root of monorepo project. This file is REQUIRED even when workspaces are defined in package.json.
 
-```json
+For monorepo projects, include all workspace directories:
+
+```yaml
+packages:
+  - "apps/*"
+  - "packages/*" 
+  - "tools/*"
+```
+
+For single package projects:
+
+```yaml
 packages:
   - '.'
 ```
+
+**Common mistake**: Do NOT rely only on package.json workspaces field - pnpm-workspace.yaml is the authoritative configuration.
 ---
 # pl-project-env | File: rules/pl-project-env.md
 
