@@ -234,7 +234,7 @@ class="p-6 md:p-10"
 ### ❌ Arbitrary Spacing Values
 ```html
 <!-- Wrong -->
-class="gap-[24px] p-[1.5rem]"
+class="gap-[24px] p-6"
 ```
 
 ### ✅ Standard Tailwind Classes

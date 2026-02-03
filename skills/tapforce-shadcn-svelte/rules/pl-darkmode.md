@@ -42,49 +42,23 @@ Import and add the `ModeWatcher` component to your root layout file (usually `sr
 
 ### 3. Create Dark Mode Toggle Components
 
+**IMPORTANT**: Component implementations may change over time. Always check the official shadcn-svelte documentation for the most current component examples:
+
+📖 **Official Documentation**: https://www.shadcn-svelte.com/docs/dark-mode/svelte
+
 Create the following components in `lib/components/darkmode/` folder:
 
-#### Simple Toggle Button (`lib/components/darkmode/simple-toggle.svelte`):
+#### Simple Toggle Button (`lib/components/darkmode/simple-toggle.svelte`)
+- Refer to the "Add a mode toggle" section in the official docs
+- Uses `toggleMode` from `mode-watcher`
+- Includes sun/moon icons with smooth transitions
 
-```svelte
-<script lang="ts">
-	import SunIcon from "@lucide/svelte/icons/sun";
-	import MoonIcon from "@lucide/svelte/icons/moon";
-	import { toggleMode } from "mode-watcher";
-	import { Button } from "$lib/components/ui/button/index.js";
-</script>
+#### Dropdown Menu Toggle (`lib/components/darkmode/dropdown-toggle.svelte`)  
+- Refer to the dropdown example in the official docs
+- Uses `setMode` and `resetMode` from `mode-watcher`
+- Provides Light/Dark/System options
 
-<Button onclick={toggleMode} variant="outline" size="icon">
-	<SunIcon class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 !transition-all dark:scale-0 dark:-rotate-90" />
-	<MoonIcon class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 !transition-all dark:scale-100 dark:rotate-0" />
-	<span class="sr-only">Toggle theme</span>
-</Button>
-```
-
-#### Dropdown Menu Toggle (`lib/components/darkmode/dropdown-toggle.svelte`):
-
-```svelte
-<script lang="ts">
-	import SunIcon from "@lucide/svelte/icons/sun";
-	import MoonIcon from "@lucide/svelte/icons/moon";
-	import { resetMode, setMode } from "mode-watcher";
-	import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
-	import { buttonVariants } from "$lib/components/ui/button/index.js";
-</script>
-
-<DropdownMenu.Root>
-	<DropdownMenu.Trigger class={buttonVariants({ variant: "outline", size: "icon" })}>
-		<SunIcon class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 !transition-all dark:scale-0 dark:-rotate-90" />
-		<MoonIcon class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 !transition-all dark:scale-100 dark:rotate-0" />
-		<span class="sr-only">Toggle theme</span>
-	</DropdownMenu.Trigger>
-	<DropdownMenu.Content align="end">
-		<DropdownMenu.Item onclick={() => setMode("light")}>Light</DropdownMenu.Item>
-		<DropdownMenu.Item onclick={() => setMode("dark")}>Dark</DropdownMenu.Item>
-		<DropdownMenu.Item onclick={() => resetMode()}>System</DropdownMenu.Item>
-	</DropdownMenu.Content>
-</DropdownMenu.Root>
-```
+**Note**: Copy the exact component code from the official documentation to ensure you have the latest implementation with proper styling and functionality.
 
 ### 4. Use the Components
 
