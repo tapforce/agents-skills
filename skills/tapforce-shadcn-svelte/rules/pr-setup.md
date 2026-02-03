@@ -26,11 +26,33 @@ The CLI init command handles ALL configuration automatically including:
 
 ## Remember shadcn version instead of `latest`
 
-**CRITICAL**: remember shadcn version instead of `latest` to avoid unexpected behavior when update shadcn ui. ALWAYS use specific version instead of `latest` for future commands. Find this version in `packages.json` file.
+**CRITICAL**: Always use specific shadcn version instead of `latest` to avoid unexpected behavior when updating shadcn ui.
+
+### How to find the correct version:
+
+1. **Check package.json**: Look in `devDependencies` for `"shadcn-svelte": "^x.x.x"`
+2. **Check package.json scripts**: Look for the `"shadcn"` script which shows the exact version
+3. **Use the exact version**: Always use the version number found in package.json
+
+### Example:
+If package.json contains:
+```json
+"devDependencies": {
+  "shadcn-svelte": "^1.1.1"
+},
+"scripts": {
+  "shadcn": "pnpm dlx shadcn-svelte@1.1.1"
+}
+```
+Then use `shadcn-svelte@1.1.1` (NOT `@latest`) in all commands.
 
 ## Add Shadcn component as needed
 
-**CRITICAL**: when need use shadcn component but not exist in project, use command: `pnpm dlx shadcn-svelte@<shadcn version> add <component-name>` to add shadcn component to the project.
+**CRITICAL**: When you need to use a shadcn component that doesn't exist in the project, use the specific version from package.json:
+
+**CORRECT**: `pnpm dlx shadcn-svelte@<VERSION_FROM_PACKAGE.JSON> add <component-name>`
+
+**WRONG**: `pnpm dlx shadcn-svelte@latest add <component-name>`
 
 ## Add package.json's script as shortcut
 
