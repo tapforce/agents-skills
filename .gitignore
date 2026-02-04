@@ -1,0 +1,10 @@
+# create web here as playground to build skills
+playground
+
+# ignore package manager locks
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# ignore mac os files
+.DS_Store
