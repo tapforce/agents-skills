@@ -18,6 +18,146 @@ Agent Skills are a lightweight, open format for extending AI agent capabilities.
 3. **Portable**: Skills are just files - easy to edit, version, and share
 4. **Extensible**: Can range from simple instructions to complex executable workflows
 
+## Agent Skills Design Guidelines
+
+### 1. Skill Naming Convention
+
+#### 1.1 Core Principles
+
+- Skill name must be **globally unique by convention**, not by enforcement
+- Always assume users may install skills from many sources
+- Name is a **technical identifier**, not marketing text
+
+#### 1.2 Required Pattern
+
+Always prefix skill names with an organization or namespace:
+
+<org>-<domain>-<scope-or-version>
+
+Examples:
+- acme-tailwindcss-v4
+- acme-sveltekit-svelte5
+- acme-nodejs-pnpm
+- acme-auth-firebase
+
+Rules:
+- Use kebab-case
+- Avoid generic names like `tailwind`, `auth`, `ui` 
+- Include major version in the name if behavior depends on it
+- Prefer clarity over brevity
+
+#### 1.3 Versioning Rule
+
+- If a skill is tied to a specific major version, version MUST be part of the name
+- Do not rely on description text to convey version constraints
+
+Correct:
+- acme-tailwindcss-v4
+
+Incorrect:
+- acme-tailwindcss (with version hidden in text)
+
+### 2. What a Skill Represents
+
+- One skill represents **one clear domain of knowledge or workflow**
+- A skill is not a full product tutorial
+- A skill should be reusable across prompts and workflows
+
+Good examples:
+- TailwindCSS setup and usage
+- Firebase authentication concepts
+- SvelteKit core architecture
+
+Bad examples:
+- "Full web development guide"
+- Mixed UI + backend + infra in one skill
+
+### 3. When to Create One Skill vs Multiple Skills
+
+#### Use ONE skill when:
+- Topics share the same core intent
+- They are always used together
+- They represent different aspects of the same domain
+
+Example:
+- TailwindCSS setup
+- Tailwind usage practices
+- Tailwind color customization  
+→ One TailwindCSS skill
+
+#### Split into MULTIPLE skills when:
+- Topics have different intents
+- One topic can be reused independently
+- One topic is framework-agnostic and another is not
+
+Example:
+- firebase-auth-core
+- firebase-auth-sveltekit
+
+### 4. Using `rules/` Inside a Skill
+
+#### 4.1 What Rules Are
+
+- Rules are **high-priority instructions**, not executable logic
+- Rules bias agent behavior but do not guarantee enforcement
+- Rules are always interpreted as text by the LLM
+
+Rules are suitable for:
+- Best practices
+- Constraints
+- Safety or security guidance
+- Strong preferences (always / never)
+
+#### 4.2 When to Use `rules/` 
+
+Use a `rules/` directory when:
+- The skill has non-negotiable practices
+- The rules apply across all usages of the skill
+- You want to separate behavior constraints from workflow steps
+
+Example structure:
+skill/
+├─ skill.md
+└─ rules/
+└─ practices.md
+
+#### 4.3 When NOT to Use `rules/` 
+
+Do NOT use rules when:
+- Content is tutorial flow
+- Content is explanatory or reference material
+- Rules repeat system prompt or global policy
+- Rules are too generic to matter
+
+Avoid:
+- Overusing rules
+- Creating rule files for every small preference
+- Encoding pseudo-code or complex conditionals
+
+### 5. How Agents Use Skills and Rules
+
+- Agents load skill metadata first (name, description, use_when)
+- Skill body is loaded only when selected
+- Rules are applied as behavioral bias, not as code
+- Multiple skills can be loaded in the same workflow if relevant
+
+### 6. Best Practices Summary
+
+- Namespace every skill
+- Keep one skill = one domain
+- Use bridge/orchestration skills for end-to-end workflows
+- Use rules sparingly and intentionally
+- Optimize for agent selection, not human storytelling
+
+### 7. Design Goal
+
+Design skills so that:
+- Agents can confidently select them
+- Skills can coexist with third-party skills
+- Skills remain stable and reusable over time
+
+---
+
 ## Skill Structure Requirements
 
 ### Directory Structure
@@ -73,6 +213,7 @@ allowed-tools: Bash Read Write
 - Include examples of inputs and outputs
 - Document common edge cases and error handling
 - Follow progressive disclosure principles
+- **ALWAYS create skills in `./skills/` directory**
 
 ### 3. Quality Assurance
 - Validate skill structure against specification
@@ -140,9 +281,26 @@ This section will be populated as we develop skills for the Tapforce ecosystem.
 - **Integration**: API connections, system interactions
 - **Automation**: Repetitive task automation and workflow orchestration
 
+## Skill Creation Process
+
+### Mandatory Directory Structure
+```
+skills/
+├── skill-name/
+│   └── SKILL.md
+```
+
+### When Creating New Skills
+- **ALWAYS use `./skills/` directory**
+- Never create skills in repository root
+- Follow naming conventions: lowercase, hyphens only
+- Include required frontmatter fields
+- Test skills in `playground/` directory
+
 ## Best Practices Checklist
 
-### Before Submitting a Skill:
+### Before Creating a Skill:
+- [ ] **ALWAYS use `./skills/` directory**
 - [ ] Name follows conventions (lowercase, hyphens, no consecutive hyphens)
 - [ ] Description includes both what AND when to use
 - [ ] All required frontmatter fields present
@@ -168,6 +326,31 @@ We use the `playground/` folder as our testing environment for generating code t
 2. **Execute Tests**: Run the generated code to validate functionality
 3. **Analyze Results**: Evaluate success and identify issues
 4. **Document Findings**: Record comprehensive analysis
+
+### Testing Workflow for Skills
+
+#### Step 1: Environment Setup
+```bash
+# Use playground directory for all testing
+mkdir -p playground/tests
+cd playground
+```
+
+#### Step 2: Test Implementation
+- Create test files that validate skill requirements
+- Test all core functionality and edge cases
+- Verify compliance with Agent Skills specification
+
+#### Step 3: Validation & Documentation
+- Run tests and capture results
+- Document findings in validation reports
+- Store test results in `playground/` directory
+
+#### Important Notes
+- **Never create test files in repository root** - they may be accidentally committed
+- **Always use `playground/` directory** - it's git-ignored and safe for temporary files
+- **Clean up test files** after validation to maintain organized workspace
+- **System temp directories** (`/tmp/`) can be used for complex tests requiring isolation
 
 ### Skill Assessment Framework
 
@@ -216,6 +399,54 @@ After each test, we provide a detailed analysis including:
 - Example skills: https://github.com/anthropics/skills
 - Best practices: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
 
+## Memory Management Guidelines
+
+### Skill-Related Tasks
+When working on Agent Skills tasks requested by the user:
+
+- **❌ Do NOT auto-create memories** for skill development, testing, or validation activities
+- **❌ Do NOT create memories** for skill analysis, evaluation, or assessment processes
+- **❌ Do NOT store memories** about individual skill implementations or test results
+- **✅ Focus on direct execution** of skill-related tasks without persistent storage
+- **✅ Provide immediate feedback** and results without creating memory entries
+
+### Rationale
+Skill development work is typically iterative and experimental. Creating memories for each task can:
+- Create unnecessary noise in the memory system
+- Lead to outdated or conflicting information
+- Reduce efficiency for future skill-related work
+- Complicate the memory landscape with transient development details
+
+### Exception Cases
+Only create memories for skill work when:
+- User explicitly requests to remember specific skill information
+- Establishing permanent skill development patterns or standards
+- Documenting major architectural decisions or frameworks
+- User triggers memory creation with explicit intent
+
+## Test Result Tracking
+
+### Result Documentation
+We maintain a comprehensive test result tracking system in `./test-report.md`. This file contains a table with the following columns:
+
+- **skill name**: Name of the tested skill
+- **percentage of understanding**: Understanding score (0-100%) based on clarity and completeness
+- **can production?**: Production readiness assessment (Yes/No/Partial)
+
+### Testing Workflow
+1. **Test Skills**: Evaluate skills using the assessment framework
+2. **Document Results**: Add or update rows in the test result table
+3. **Track Progress**: Monitor improvement over multiple testing iterations
+4. **Production Decisions**: Use results to determine production readiness
+
+### Result Table Format
+```markdown
+| skill name | percentage of understanding | can production? |
+|------------|----------------------------|-----------------|
+| example-skill | 85% | Yes |
+| another-skill | 72% | Partial |
+```
+
 ## Continuous Improvement
 
 We regularly review and update our skills based on:
@@ -223,6 +454,7 @@ We regularly review and update our skills based on:
 - Advances in AI capabilities
 - Updates to the Agent Skills specification
 - Emerging best practices and patterns
+- Test result analysis and production readiness assessments
 
 ---
 
