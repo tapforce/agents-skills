@@ -20,7 +20,8 @@ A `store` is a JS class that initialized (new Class) and store in `svelte contex
 - Use `$state()` for variable mutatable, assign as property.
 - Use `$derived()` for variable derived from other variables, assign as property.
 - Define class method as shared function.
-- Avoid use constructor as place to initialize data, use `createStore()` function to initialize data.
+- **NEVER** use constructor for reactive initialization, data fetching, or setting up listeners. **ALWAYS** use `createStore()` function for these purposes.
+- Constructor should only be used for simple property assignments, not for any reactive operations.
 
 **Example class store**
 
@@ -32,6 +33,41 @@ export class Store {
   increment() {
     this.count++;
   }
+}
+```
+
+**Incorrect: Using constructor for reactive operations**
+
+```typescript
+export class Store {
+  count = $state(0);
+
+  // ❌ WRONG - Don't use constructor for reactive setup
+  constructor() {
+    someApi.on('change', (data) => {
+      this.count = data.count;
+    });
+  }
+}
+```
+
+**Correct: Using createStore() for reactive operations**
+
+```typescript
+export class Store {
+  count = $state(0);
+}
+
+// ✅ CORRECT - Use createStore() for reactive setup
+export function createStore() {
+  const store = new Store();
+  
+  someApi.on('change', (data) => {
+    store.count = data.count;
+  });
+  
+  setContext(sid, store);
+  return store;
 }
 ```
 

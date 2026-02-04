@@ -31,6 +31,15 @@ install `firebase` package. **Always** use `[pkgm] install firebase` to install 
 
 Choose 1 file as top priority.
 
+## Environment File Setup
+
+**Always** check for existing env files in this priority order:
+1. .env
+2. .env.development  
+3. .env.local
+
+**If no env file exists**, create `.env` file with the required Firebase variables.
+
 **Snippet: env file**
 
 ```bash
