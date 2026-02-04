@@ -1,9 +1,9 @@
 ---
-name: tapforce-auth-firebase-svelte
+name: tapforce-sveltekit-auth-firebase
 description: Practices making authenticate flow use firebase on tapforce Svelte project web
 ---
 
-# tapforce-auth-firebase-svelte
+# tapforce-sveltekit-auth-firebase
 
 Comprehesive guide for making authenticate flow for web use firebase sdk on Svelte project.
 

@@ -1,9 +1,9 @@
 ---
-name: tapforce-shadcn-svelte
+name: tapforce-sveltekit-shadcn
 description: Comprehensive guide for using Shadcn UI with SvelteKit
 ---
 
-# tapforce-shadcn-svelte
+# tapforce-sveltekit-shadcn
 
 Use Shadcn UI version svelte to co-op with SvelteKit project. The target is replace manual svelte components with shadcn ui components if possible.
 
