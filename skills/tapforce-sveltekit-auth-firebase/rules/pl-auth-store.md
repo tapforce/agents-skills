@@ -24,31 +24,58 @@ const sid = Symbol("auth");
 
 export class Auth {
   readonly auth = getAuth(firebaseApp);
-  user = $state<User | null>(null);
 
+  /* Reactive state for authentication */
+  user = $state<User | null | undefined>(undefined);
+
+  /* Derived computed properties for auth state */
+  isAuthed = $derived.by(() => !!this.user);
+
+  /* Derived computed property for guest state */
+  isGuest = $derived.by(() => this.user === null);
+
+  /**
+   * Authenticates a user with email and password credentials
+   * @param email - User's email address
+   * @param password - User's password
+   * @returns The authenticated user object
+   * @throws Error if authentication fails
+   */
   async loginWithCredentials(email: string, password: string) {
     try {
       const result = await signInWithEmailAndPassword(this.auth, email, password);
       return result.user;
     } catch (error) {
+      // Handle authentication errors
       throw error;
     }
   }
 
+  /**
+   * Signs out the currently authenticated user
+   * @throws Error if logout fails
+   */
   async logout() {
     try {
       await signOut(this.auth);
     } catch (error) {
+      // Handle logout errors
       throw error;
     }
   }
 
+  /**
+   * Authenticates a user using Google OAuth popup
+   * @returns The authenticated user object
+   * @throws Error if Google sign-in fails
+   */
   async loginByGoogle() {
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(this.auth, provider);
       return result.user;
     } catch (error) {
+      // Handle Google sign-in errors
       throw error;
     }
   }
@@ -87,8 +114,12 @@ const auth = createAuth();
 import { useAuth } from '$lib/auth/auth.svelte';
 const auth = useAuth();
 
-// Check user state
-$: isLoggedIn = !!auth.user;
+// Check auth state using derived properties
+console.log('Is authenticated:', auth.isAuthed);
+console.log('Is guest:', auth.isGuest);
+
+// Or check user state directly
+console.log('Current user:', auth.user);
 
 // Login with email/password
 try {
