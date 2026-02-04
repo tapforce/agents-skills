@@ -1,9 +1,9 @@
 ---
-name: tapforce-talwindcss
+name: tapforce-tailwindcss
 description: Practices to use consistent tailwindcss in project Svelte
 ---
 
-# tapforce-talwindcss
+# tapforce-tailwindcss
 
 Collection of practices to use consistent tailwindcss in project Svelte.
 
