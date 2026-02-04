@@ -1,5 +1,5 @@
 ---
-name: tapforce-nodejs-pnpm
+name: tapforce-nodejs-pnpm-v10
 description: Use this skill when starting any Node.js project. Strongly recommended for all Node.js development. Provides guidance on using pnpm as the default package manager, ensuring version >=10, creating pnpm-workspace.yaml, and replacing npm/yarn commands with pnpm equivalents.
 license: Apache-2.0
 metadata:
@@ -9,7 +9,7 @@ compatibility: Requires Node.js v18.12+ and pnpm >=10
 allowed-tools: Bash Read Write
 ---
 
-# Tapforce Node.js pnpm Skill
+# Tapforce Node.js pnpm v10 Skill
 
 Use this skill when starting any Node.js project. This skill strongly recommends pnpm as the default package manager for all Node.js development.
 
