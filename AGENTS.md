@@ -121,7 +121,36 @@ skill/
 └─ rules/
 └─ practices.md
 
-#### 4.3 When NOT to Use `rules/` 
+#### 4.3 Rule Creation Guidelines
+
+When creating rules inside a skill:
+
+**Focus on Single Issues**: Each rule should address **one specific issue** or behavior bias. Avoid grouping multiple unrelated issues in a single rule.
+
+**Separate Rule Files**: Keep each rule category in its own file within the `rules/` directory. This maintains focus and makes rules easier to manage and apply selectively.
+
+**Meaningful Content**: Rules should contain focused, meaningful content that clearly biases agent behavior toward a specific practice or constraint.
+
+**Rule Structure**:
+- **ALWAYS/NEVER**: Use strong directive language for clear behavioral guidance
+- **Single Focus**: Each rule targets one specific aspect (e.g., color format, file location, syntax pattern)
+- **Actionable**: Rules should directly influence agent decisions and actions
+
+**Examples of Focused Rules**:
+- ✅ **ALWAYS** use `oklch()` color values instead of legacy RGB/HSL
+- ✅ **NEVER** create a separate config file for TailwindCSS v4
+- ✅ **ALWAYS** place `!` AFTER the class name in v4 syntax
+
+**Avoid Multi-Issue Rules**:
+- ❌ **ALWAYS** use oklch colors, avoid config files, and place ! after classes
+- ❌ **NEVER** mix v3/v4 patterns, write inline CSS, or use generic names
+
+**Rule File Organization**:
+- Create separate files for each rule category (e.g., `color-format.md`, `configuration.md`)
+- Use descriptive filenames that clearly indicate the rule's focus
+- Keep rule files concise and focused on their specific domain
+
+#### 4.4 When NOT to Use `rules/` 
 
 Do NOT use rules when:
 - Content is tutorial flow
