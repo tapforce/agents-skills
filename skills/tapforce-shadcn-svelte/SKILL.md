@@ -47,6 +47,23 @@ Reference documentation:
   - Verify v4 installation by checking `package.json` for `tailwindcss` version 4.x
 - **Clean Slate**: Project must not have shadcn-svelte implemented previously
 
+## Project Setup (if starting new)
+
+**IMPORTANT**: The command `create svelte@latest` is deprecated and should NOT be used. 
+
+For new SvelteKit projects, ALWAYS use the modern command:
+```bash
+# Use the detected package manager
+<package-manager> sv create my-project
+
+# Examples:
+pnpm sv create my-project
+npm sv create my-project  
+bun sv create my-project
+```
+
+This ensures compatibility with modern SvelteKit and avoids deprecated command issues.
+
 ## Pre-Setup Checking
 
 Before setting up shadcn-svelte, perform these critical checks:

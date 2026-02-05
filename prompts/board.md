@@ -9,6 +9,11 @@ fresh test skill `tapforce-shadcn-svelte`, use skills below as as your skills:
 - `tapforce-sveltekit-v2-svelte-v5`
 - `tapforce-tailwindcss-v4`
 
+fresh test skill `tapforce-shadcn-svelte-blocks`, use skills below as as your skills:
+- `tapforce-nodejs-pnpm-v10`
+- `tapforce-sveltekit-v2-svelte-v5`
+- `tapforce-tailwindcss-v4`
+- `tapforce-shadcn-svelte`
 ---
 
 
@@ -39,3 +44,8 @@ Add a rule counter issue:
 ```ERR_PNPM_INVALID_WORKSPACE_CONFIGURATION packages field missing or empty```
 
 when meet this issue and project considered to use `pnpm` as main package manager, you must add `pnpm-workspace.yaml` and content following the skill explained instead of adding any other common fixes you found. Avoid try custom fix like adding `"workspaces": ["."]` to `package.json`.
+
+
+correct skill `tapforce-shadcn-svelte`
+
+find section guide install package, strong mention that the command `create svelte@latest` is deprecated and should not be used. MUST use `<package manager> sv create .` as official guide. 

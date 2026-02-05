@@ -166,7 +166,8 @@ When creating rules inside a skill:
 - ❌ **ALWAYS** use oklch colors, avoid config files, and place ! after classes
 - ❌ **NEVER** mix v3/v4 patterns, write inline CSS, or use generic names
 
-**Rule File Organization**:
+#### 4.4 Rule File Organization
+
 - Create separate files for each rule category (e.g., `color-format.md`, `configuration.md`)
 - Use descriptive filenames that clearly indicate the rule's focus
 - Keep rule files concise and focused on their specific domain
