@@ -1,5 +1,6 @@
 # create web here as playground to build skills and testing
 playground
+./prompt.md
 
 # ignore package manager locks
 pnpm-lock.yaml

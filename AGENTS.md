@@ -349,35 +349,78 @@ skills/
 ## Testing & Validation Process
 
 ### Playground Environment
-We use the `playground/` folder as our testing environment for generating code that follows skill specifications. When testing skills:
+We use the `playground/` folder as our **MANDATORY** testing environment for generating code that follows skill specifications. When testing skills:
 
-1. **Generate Code**: Create test implementations in `playground/` following the skill's instructions
+1. **Generate Code**: **MUST create test implementations in `playground/`** following the skill's instructions
 2. **Execute Tests**: Run the generated code to validate functionality
 3. **Analyze Results**: Evaluate success and identify issues
 4. **Document Findings**: Record comprehensive analysis
+
+**IMPORTANT**: The `playground/` directory is git-ignored, making it safe for temporary test files. **ALL test files MUST be placed here** - no exceptions.
+
+### Git Ignore Access Policy
+When encountering issues accessing files that are blocked by git ignore rules:
+
+1. **STOP IMMEDIATELY** - Do not proceed with the operation
+2. **REQUEST USER PERMISSION** - Ask the user to explicitly allow access to git-ignored files
+3. **FOLLOW IDE-SPECIFIC PROCESS** - The exact option may vary depending on your IDE tools:
+   - VS Code: Look for "Allow" or "Trust" prompts in the status bar
+   - Cursor: Check for permission dialogs or status bar notifications
+   - Other IDEs: Look for similar permission requests in the UI
+4. **WAIT FOR CONFIRMATION** - Only proceed after the user has granted explicit access
+
+**NEVER bypass git ignore restrictions without user consent. This protects both the repository integrity and user privacy.**
 
 ### Testing Workflow for Skills
 
 #### Step 1: Environment Setup
 ```bash
-# Use playground directory for all testing
+# **MANDATORY: Always clear playground before testing**
+rm -rf playground/*
 mkdir -p playground/tests
 cd playground
 ```
 
 #### Step 2: Test Implementation
+- **MUST create test files in `playground/` directory** - no exceptions
 - Create test files that validate skill requirements
 - Test all core functionality and edge cases
 - Verify compliance with Agent Skills specification
+- **NEVER create test files in repository root or other locations**
 
-#### Step 3: Validation & Documentation
-- Run tests and capture results
-- Document findings in validation reports
-- Store test results in `playground/` directory
+#### Step 3: Post-Test Documentation (MANDATORY)
+After testing any skill (single or multiple), you **MUST**:
 
-#### Important Notes
-- **Never create test files in repository root** - they may be accidentally committed
-- **Always use `playground/` directory** - it's git-ignored and safe for temporary files
+1. **Update Test Report Table**: 
+   - Find the skill row in `./test-report.md` table
+   - Update existing row or add new row with:
+     - skill name
+     - percentage of understanding (0-100%)
+     - can production? (Yes/No/Partial)
+
+2. **Create Individual Test Report**:
+   - Create new file named `<skill-name>_test.md` in the repository root
+   - Include comprehensive analysis:
+     - Understanding percentage and scoring rationale
+     - How you understood the skill's purpose and functionality
+     - Parts that need improvement with specific examples
+     - Parts that were unclear or confusing
+     - Suggestions for making the skill better
+     - Any assumptions made during testing
+
+3. **Clean Up Playground**:
+   - **MANDATORY: Run `pnpm clean:playground` from project root after finishing all tests**
+   - This ensures the playground folder is properly cleared for future use
+
+#### Critical Requirements
+- **MANDATORY: All test files MUST be placed in `./playground/` folder**
+- **MANDATORY: ALWAYS clear the `playground` folder before doing a test** using `rm -rf playground/*`
+- **MANDATORY: Update test-report.md table after each test**
+- **MANDATORY: Create individual test report file for each skill tested**
+- **MANDATORY: Run `pnpm clean:playground` from project root after finishing all tests**
+- **NEVER create test files in repository root** - they may be accidentally committed
+- **ALWAYS use `playground/` directory** - it's git-ignored and safe for temporary files
+- **NO EXCEPTIONS** - this rule applies regardless of file type or test complexity
 - **Clean up test files** after validation to maintain organized workspace
 - **System temp directories** (`/tmp/`) can be used for complex tests requiring isolation
 
