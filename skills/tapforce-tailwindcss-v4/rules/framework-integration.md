@@ -1,3 +1,9 @@
+---
+name: framework-integration
+description: Rule for proper TailwindCSS v4 integration with frameworks
+tags: [tailwindcss, framework, integration]
+---
+
 # TailwindCSS v4 Framework Integration Rules
 
 - **ALWAYS** follow framework-specific CSS file locations

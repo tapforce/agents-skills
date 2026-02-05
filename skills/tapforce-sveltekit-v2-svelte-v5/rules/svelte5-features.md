@@ -1,3 +1,9 @@
+---
+name: svelte5-features
+description: Rule for using Svelte 5 modern features like $state, $effect, $props, $derived
+tags: [svelte, svelte5, features, reactivity]
+---
+
 **ALWAYS** write Svelte code using Svelte version >= 5 features including:
 - `$state` for reactive state management
 - `$effect` for side effects

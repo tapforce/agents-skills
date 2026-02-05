@@ -1,3 +1,9 @@
+---
+name: installation
+description: Rule for installing SvelteKit in current directory
+tags: [sveltekit, installation, setup]
+---
+
 **ALWAYS** install SvelteKit to the current folder using the command:
 ```bash
 npx sveltekit@latest create .

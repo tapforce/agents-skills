@@ -1,3 +1,9 @@
+---
+name: props-typing
+description: Rule for proper TypeScript prop typing with destructuring in Svelte 5
+tags: [svelte, props, typescript, typing]
+---
+
 **ALWAYS** define props using destructuring with proper TypeScript types.
 
 **NEVER** use `any` or `unknown` types for props.

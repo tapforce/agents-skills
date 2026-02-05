@@ -1,3 +1,9 @@
+---
+name: class-array-syntax
+description: Rule for using array syntax in HTML class attributes for better readability
+tags: [svelte, html, class, syntax]
+---
+
 **ALWAYS** use array syntax for HTML `class` attributes when the class string exceeds 100 characters per line.
 
 **ALWAYS** break long class strings into multiple lines using array syntax with line width not exceeding 100 characters.

@@ -1,5 +1,18 @@
 # Tapforce Agent Skills Agency Guide
 
+## 🚨 CRITICAL TESTING WORKFLOW (MANDATORY)
+
+**After testing ANY skill, you MUST complete these steps:**
+
+1. **Test in Playground**: Follow skill instructions in `./playground/` directory
+2. **Update Test Report**: Add/update skill row in `./test-report.md` 
+3. **Create Individual Report**: Write `<skill-name>_test.md` in `./test-summary/` directory with detailed analysis
+4. **Clean Playground**: Run `rm -rf playground/*` after testing
+
+**NO EXCEPTIONS** - This workflow is mandatory for every skill test.
+
+---
+
 ## Our Mission
 
 We are a helpful agent-skills agency dedicated to developing high-quality Agent Skills for AI models. Our expertise is based on the [Agent Skills specification](https://agentskills.io) from agentskills.io. We create skills that extend AI agent capabilities with specialized knowledge and workflows.
@@ -135,6 +148,14 @@ When creating rules inside a skill:
 - **ALWAYS/NEVER**: Use strong directive language for clear behavioral guidance
 - **Single Focus**: Each rule targets one specific aspect (e.g., color format, file location, syntax pattern)
 - **Actionable**: Rules should directly influence agent decisions and actions
+- **MANDATORY Frontmatter**: Every rule file MUST include YAML frontmatter with:
+  ```yaml
+  ---
+  name: rule-name
+  description: Clear description of what this rule governs
+  tags: [tag1, tag2]
+  ---
+  ```
 
 **Examples of Focused Rules**:
 - ✅ **ALWAYS** use `oklch()` color values instead of legacy RGB/HSL
@@ -282,6 +303,8 @@ When evaluating skills, we assess:
 - **❌ Poor**: Missing or incorrect metadata
 - **✅ Good**: Reasonable context size for agent loading
 - **❌ Poor**: Excessively long or inefficient content
+- **✅ Good**: Follows exact directory structure requirements
+- **❌ Poor**: Creates unauthorized directories or deviates from spec
 
 ## Improvement Guidelines
 
@@ -324,7 +347,17 @@ skills/
 - Never create skills in repository root
 - Follow naming conventions: lowercase, hyphens only
 - Include required frontmatter fields
+- **ALWAYS follow exact Agent Skills directory structure**
 - Test skills in `playground/` directory
+
+**MANDATORY**: Always respect the Agent Skills specification directory structure:
+```
+skill-name/
+├── SKILL.md          # Required
+├── scripts/          # Optional: executable code
+├── references/       # Optional: documentation
+└── assets/           # Optional: templates, resources
+```
 
 ## Best Practices Checklist
 
@@ -333,6 +366,7 @@ skills/
 - [ ] Name follows conventions (lowercase, hyphens, no consecutive hyphens)
 - [ ] Description includes both what AND when to use
 - [ ] All required frontmatter fields present
+- [ ] **ALWAYS follow exact Agent Skills directory structure**
 - [ ] Instructions are step-by-step and actionable
 - [ ] Examples provided for key operations
 - [ ] Edge cases documented
@@ -345,6 +379,44 @@ skills/
 - [ ] Validate file structure
 - [ ] Check for consistency with other skills
 - [ ] Document any prerequisites
+
+## 🧪 SKILL TESTING WORKFLOW (MANDATORY)
+
+### Step 1: Playground Testing
+```bash
+# MANDATORY: Clear playground first
+rm -rf playground/*
+# Follow skill instructions in playground/
+# Create real test implementations
+# Execute and validate functionality
+```
+
+### Step 2: Update Test Report Table
+- Edit `./test-report.md`
+- Add/update row with:
+  - skill name
+  - percentage of understanding (0-100%)
+  - can production? (Yes/No/Partial)
+
+### Step 3: Create Individual Test Report
+- Create file `<skill-name>_test.md` in `./test-summary/` directory
+- Include:
+  - Understanding percentage and rationale
+  - Clear parts analysis
+  - Unclear parts with specific examples
+  - Suggestions for improvement
+  - Production readiness assessment
+
+**MANDATORY: All test summary files MUST be placed in `./test-summary/` folder - NO EXCEPTIONS**
+
+### Step 4: Clean Up
+```bash
+rm -rf playground/*
+```
+
+**THIS ENTIRE WORKFLOW IS MANDATORY - NO EXCEPTIONS**
+
+---
 
 ## Testing & Validation Process
 
@@ -399,7 +471,7 @@ After testing any skill (single or multiple), you **MUST**:
      - can production? (Yes/No/Partial)
 
 2. **Create Individual Test Report**:
-   - Create new file named `<skill-name>_test.md` in the repository root
+   - Create new file named `<skill-name>_test.md` in the `./test-summary/` directory
    - Include comprehensive analysis:
      - Understanding percentage and scoring rationale
      - How you understood the skill's purpose and functionality
@@ -407,6 +479,8 @@ After testing any skill (single or multiple), you **MUST**:
      - Parts that were unclear or confusing
      - Suggestions for making the skill better
      - Any assumptions made during testing
+
+**MANDATORY: All test summary files MUST be placed in `./test-summary/` folder - NO EXCEPTIONS**
 
 3. **Clean Up Playground**:
    - **MANDATORY: Run `pnpm clean:playground` from project root after finishing all tests**

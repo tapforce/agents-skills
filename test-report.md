@@ -8,6 +8,7 @@ This document tracks the testing results of Agent Skills developed by Tapforce. 
 |------------|----------------------------|-----------------|
 | tapforce-nodejs-pnpm | 95% | Yes |
 | tapforce-sveltekit-v2-svelte-v5 | 97% | Yes |
+| tapforce-monorepo-moon | 98% | Yes |
 
 ## Assessment Criteria
 

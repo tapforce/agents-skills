@@ -1,40 +1,69 @@
-add new skill `tapforce-sveltekit-v2-svelte-v5`
+add new skill `tapforce-monorepo-moon`
 
-use when project mentions use sveltekit, create new project.
+this skill is a guide set up monorepo project use moon as monorepo manager. Introduce this tool can be found at: https://moonrepo.dev/docs. You should mention this source link. This skill is guide for version 1 and 2 of moon.
 
-content include:
+use this skill when project mentions use monorepo, create new project, or when you see the project requirements is complex, with more than 1 application and need to split into multiple packages.
 
-reference to llms txt:
-https://svelte.dev/docs/kit/llms.txt
+content of guide:
 
-1. check project if sveltekit installed.
+## check environment had Moon or not
 
-- if installed, make sure version is >= 2 and svelte version is >= 5
-- if not installed, create new project to curent folder.
+You need check env of user has Moon installed or not. The checking steps following:
 
-1.2. version is not match, update to latest version
+1. run command `pnpm moon --version`, if it show version with major number is 1 or 2, this is correct.
+2. if [1] not show any version, try check moon at global scope by command : `moon --version`.
 
-1.3. install sveltekit
+cases:
+- if result not show version or say not found mean user not install Moon. You need install moon by nodejs package manager, always prefer use `pnpm` if available.
+- if result show version with major not 1 or 2, then skip this skill since it is only guide for version 1 and 2 of moon.
 
-read and understand document: https://svelte.dev/docs/kit/creating-a-project.
+After make sure Moon installed, check project really set up with moon structure or not. Check by:
 
+check if root of project had folder `.moon` folder or not. If not found, assumption you will need init moon project. If found, assumption you will adapt current structure to continue using moon.
 
-Bias rules:
+If moon installed at global scope, you need find `package.json` file at root of project and add script `moon` to simulate command call moon like local project.
 
-- sveltekit must installed to current folder, suggest use command:
+`moon` -> `pnpm moon`
 
-```bash
-npx sveltekit@latest create .
+use command `pnpm moon <command>` to call moon command from now on.
+
+## init moon project
+
+To init moon project, use `pnpm moon init` command. Following steps:
+
+1. run command `pnpm moon init`
+2. validate and create if not found folders `apps` and `packages`. Consider `apps` folder is the place store applications. Consider `packages` folder is the place store packages.
+
+## validate project structure
+
+validate and setup toolchain. The guideline can found at: https://moonrepo.dev/docs/setup-toolchain.
+
+## Reference sources:
+
+- [workspace file](https://moonrepo.dev/docs/config/workspace)
+- [extension file](https://moonrepo.dev/docs/config/extensions)
+- [toolchain file](https://moonrepo.dev/docs/config/toolchain)
+- [task file](https://moonrepo.dev/docs/config/tasks)
+- [moon file (app|package scope)](https://moonrepo.dev/docs/config/project)
+
+ATTENTION: don't try create all config file of Moon if not nessessary. You only create file as needed.  
+
+## bias rules:
+
+### each applications or packages should has own `moon.yml` file
+
+Each applications or packages should has own `moon.yml` file. This file contains `tasks` object where define tasks. Tasks can forward `scripts` from `package.json` of current application or package to `moon.yml`.
+
+### when project using pnpm, and find `pnpm-workspace.yaml` exist, you need consider link packages to applications as dependency.
+
+When project using pnpm, and find `pnpm-workspace.yaml` exist, and when request say need import package A to application B, you need add package name into application B `package.json` as dependency use syntax:
+
+```json
+"dependencies": {
+    "package-a": "workspace:*"
+}
 ```
 
-- while install, CLI can asking choose optional packages want to installed along with sveltekit. Let's user choose. Optional packages can be `tailwindcss`, `adapter-vercel` etc.
+Keep in mind that always use `workspace:*` to link package to application.
 
-- Strong mention always write svelte codes with features svelte version >= 5 like `$state`, `$effect` etc. Or with props `let {...} = $props()`, or `{@render children()}` etc. 
-
-- Strong mention inside component, when need define props use destructuring, always include type of property with real type, not `any` or `unknown` .
-
-- Strong mention when write svelte code html tag with long `class` asstribute (`class="..."`), break the long class string to multi strings width not over 100 characters per line, wrap multi strings with array, replace to `class={[...]}`. Add explaintation that `svelte 5` support class array by core.
-
-- Strong mention always use class-array style whenever having classes can be switch or toggle by condition.  Take example for this case
-
-
+Always run `pnpm install` and `pnpm moon setup` everytime change dependency of any application or package.
