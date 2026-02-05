@@ -266,3 +266,39 @@ If migrating from TailwindCSS v3:
 3. Move configuration to `@theme` block in CSS
 4. Update priority syntax from `!class` to `class!`
 5. Replace custom CSS with utility classes where possible
+
+## Rules
+
+This skill includes the following behavioral rules in the `rules/` directory:
+
+### Color Format
+- **Rule**: Use oklch color values instead of legacy RGB/HSL
+- **File**: `rules/color-format.md`
+- **Details**: Always use `oklch()` color values and define custom colors as CSS variables
+
+### Configuration
+- **Rule**: Avoid separate config files for TailwindCSS v4
+- **File**: `rules/configuration.md`
+- **Details**: Place `@theme` configuration after `@import "tailwindcss";`
+
+### Framework Integration
+- **Rule**: Follow framework-specific integration patterns
+- **File**: `rules/framework-integration.md`
+- **Details**: Use correct CSS file locations and imports for your framework
+
+### Priority Syntax
+- **Rule**: Use correct priority syntax with ! in v4
+- **File**: `rules/priority-syntax.md`
+- **Details**: Place `!` AFTER the class name (e.g., `bg-red-500!`)
+
+### Styling Approach
+- **Rule**: Prefer TailwindCSS classes over custom CSS
+- **File**: `rules/styling-approach.md`
+- **Details**: Never write inline CSS, prefer TailwindCSS class syntax
+
+### Usage Patterns
+- **Rule**: Use @utility directive and arbitrary values appropriately
+- **File**: `rules/usage-patterns.md`
+- **Details**: Use `@utility` for reusable styles, arbitrary values for one-off styles
+
+These rules provide behavioral bias for agents using this skill and should be applied as high-priority guidelines.

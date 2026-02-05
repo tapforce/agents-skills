@@ -171,7 +171,50 @@ When creating rules inside a skill:
 - Use descriptive filenames that clearly indicate the rule's focus
 - Keep rule files concise and focused on their specific domain
 
-#### 4.4 When NOT to Use `rules/` 
+#### 4.5 Avoiding Duplication Between Skills and Rules
+
+**CRITICAL**: Never duplicate rule content between the main SKILL.md file and individual rule files.
+
+**Best Practice**:
+- **SKILL.md**: Should only reference or summarize rules, not duplicate their full content
+- **Rule files**: Contain the complete, detailed rule content with proper frontmatter
+- **Reference approach**: In SKILL.md, provide brief descriptions and point to the rule files
+
+**Example of Proper Reference**:
+```markdown
+## Rules
+
+This skill includes the following behavioral rules in the `rules/` directory:
+
+### Component Preference
+- **Rule**: Always prefer shadcn-svelte built-in components over custom implementations
+- **File**: `rules/component-preference.md`
+- **Details**: Reference https://www.shadcn-svelte.com/docs/components before creating custom components
+
+### Custom Styling
+- **Rule**: Follow TailwindCSS v4 and shadcn-svelte theming guidelines
+- **File**: `rules/custom-styling.md`
+- **Details**: Use CSS Variables for theming, respect v4 features
+```
+
+**MANDATORY Requirements for Rule References**:
+- **ALWAYS** include the relative file path using `- **File**: `rules/rule-name.md`` format
+- **NEVER** reference rules without providing the file path
+- **ALWAYS** use relative paths from the skill root directory
+- **ENSURE** file paths exactly match the actual rule file names
+
+**What to Avoid**:
+- ❌ Copying full rule text from rule files into SKILL.md
+- ❌ Repeating rule content in multiple places
+- ❌ Having conflicting instructions between SKILL.md and rule files
+
+**Benefits**:
+- Single source of truth for each rule
+- Easier maintenance and updates
+- Reduced cognitive load for agents
+- Clear separation of concerns
+
+#### 4.6 When NOT to Use `rules/` 
 
 Do NOT use rules when:
 - Content is tutorial flow

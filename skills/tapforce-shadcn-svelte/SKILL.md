@@ -164,49 +164,31 @@ After adding a component, import it like this:
 <Button>Click me</Button>
 ```
 
-## Bias Rules
+## Rules
 
-### 1. Respect shadcn Components
+This skill includes the following behavioral rules in the `rules/` directory:
 
-Always reference https://www.shadcn-svelte.com/docs/components to find matching components for user requests. Don't create custom components prematurely.
+### Component Preference
+- **Rule**: Always prefer shadcn-svelte built-in components over custom implementations
+- **File**: `rules/component-preference.md`
+- **Details**: Reference https://www.shadcn-svelte.com/docs/components before creating custom components
 
-### 2. Custom Style Guidelines
+### Custom Styling
+- **Rule**: Follow TailwindCSS v4 and shadcn-svelte theming guidelines
+- **File**: `rules/custom-styling.md`
+- **Details**: Use CSS Variables for theming, respect v4 features, follow https://www.shadcn-svelte.com/docs/theming
 
-When customizing styles (colors, spacing, etc.):
-- Respect TailwindCSS v4 rules and features
-- Follow shadcn-svelte theming documentation: https://www.shadcn-svelte.com/docs/theming
-- Use CSS Variables for theming as recommended
+### Modern Features
+- **Rule**: Always use Svelte 5 and TailwindCSS v4 modern features
+- **File**: `rules/modern-features.md`
+- **Details**: Use modern syntax and patterns, avoid legacy versions
 
-### 3. Modern Framework Features
+### Preserve Originals
+- **Rule**: Never modify shadcn-svelte original components directly
+- **File**: `rules/preserve-originals.md`
+- **Details**: Create wrapper components for customization, never edit $lib/components/ui/ directly
 
-Always respect:
-- **Svelte 5 features**: Use modern Svelte syntax and patterns
-- **TailwindCSS v4 features**: Leverage latest Tailwind capabilities
-- Avoid legacy Svelte or Tailwind patterns
-
-### 4. Preserve Original Components
-
-**NEVER modify shadcn-svelte component code directly**. This ensures safe upgrades.
-
-When customization is needed:
-- Create new custom components that wrap shadcn components
-- Place custom components in project-preferred folders
-- Maintain original component integrity
-
-Example: For a custom button style not supported by shadcn's button:
-```svelte
-<!-- $lib/components/custom-button.svelte -->
-<script lang="ts">
-  import { Button } from "$lib/components/ui/button/index.js";
-  import { cn } from "$lib/utils.js";
-  
-  let { class: className, ...restProps } = $props();
-</script>
-
-<Button class={cn("custom-button-styles", className)} {...restProps}>
-  {@render children()}
-</Button>
-```
+These rules provide behavioral bias for agents using this skill and should be applied as high-priority guidelines.
 
 ## Component Categories
 

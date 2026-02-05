@@ -93,10 +93,24 @@ Create configuration files as needed (don't create all files unnecessarily):
 
 ## Rules
 
-This skill includes behavioral rules in the `rules/` directory that provide guidance for:
-- Moon configuration best practices
-- pnpm workspace integration patterns  
-- Dependency management workflows
+This skill includes the following behavioral rules in the `rules/` directory:
+
+### Moon Configuration
+- **Rule**: Ensure each application/package has its own moon.yml file with tasks
+- **File**: `rules/moon-configuration.md`
+- **Details**: Define available tasks in moon.yml that can forward scripts from package.json
+
+### pnpm Workspace Integration
+- **Rule**: Use workspace:* syntax when linking packages in pnpm workspace projects
+- **File**: `rules/pnpm-workspace-integration.md`
+- **Details**: Use `workspace:*` syntax for dependencies between packages in the same workspace
+
+### Dependency Management
+- **Rule**: Run install and setup commands after dependency changes
+- **File**: `rules/dependency-management.md`
+- **Details**: Always run `pnpm install` and `pnpm moon setup` after changing dependencies
+
+These rules provide behavioral bias for agents using this skill and should be applied as high-priority guidelines.
 
 ## Common Tasks
 

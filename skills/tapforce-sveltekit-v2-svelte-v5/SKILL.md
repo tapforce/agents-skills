@@ -285,16 +285,31 @@ npm run dev
 </style>
 ```
 
-## Bias Rules
+## Rules
 
-This skill includes specific bias rules in the `rules/` directory:
+This skill includes the following behavioral rules in the `rules/` directory:
 
-- **installation.md**: Installation command and CLI interaction guidelines
-- **svelte5-features.md**: Mandatory use of Svelte 5 runes and modern syntax
-- **props-typing.md**: Required props destructuring with proper TypeScript types
-- **class-array-syntax.md**: Array syntax for long and conditional class attributes
+### Installation
+- **Rule**: Install SvelteKit in current directory using specific command
+- **File**: `rules/installation.md`
+- **Details**: Always use `npx sveltekit@latest create .` and let users choose optional packages
 
-These rules override general coding practices and must be followed strictly when working with SvelteKit projects.
+### Svelte 5 Features
+- **Rule**: Always use Svelte 5 modern features and syntax
+- **File**: `rules/svelte5-features.md`
+- **Details**: Use $state, $effect, $props(), $derived, $bindable, and {@render} snippets
+
+### Props Typing
+- **Rule**: Use proper TypeScript prop typing with destructuring
+- **File**: `rules/props-typing.md`
+- **Details**: Always define props with specific types, never use any/unknown
+
+### Class Array Syntax
+- **Rule**: Use array syntax for long and conditional class attributes
+- **File**: `rules/class-array-syntax.md`
+- **Details**: Use array syntax for classes over 100 characters or with conditions
+
+These rules provide behavioral bias for agents using this skill and should be applied as high-priority guidelines.
 
 ## Common Patterns
 
