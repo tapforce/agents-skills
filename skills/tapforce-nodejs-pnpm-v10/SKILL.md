@@ -16,7 +16,7 @@ Use this skill when starting any Node.js project. This skill strongly recommends
 ## When to Use
 
 - Starting a new Node.js project
-- Setting up a Node.js development environment
+- Setting up a Node.js development environment  
 - Converting existing projects to use pnpm
 - Any Node.js-related development work
 
@@ -55,7 +55,54 @@ pnpm --version
 # Should output version >= 10.0.0
 ```
 
-### 2. Set pnpm as Default Package Manager
+### 2. Create pnpm-workspace.yaml (CRITICAL FIRST STEP)
+
+**MANDATORY REQUIREMENT**: Always create `pnpm-workspace.yaml` file in the root directory of your project BEFORE running any pnpm commands.
+
+#### Why This is Critical
+- pnpm requires workspace configuration to function properly
+- Missing workspace configuration causes dependency resolution issues
+- Many pnpm commands will fail or behave unexpectedly without this file
+
+#### Create and Verify Workspace File
+```bash
+# ALWAYS do this FIRST, before any other pnpm commands
+echo 'packages:\n  - "."' > pnpm-workspace.yaml
+
+# Verify the file exists and has content
+cat pnpm-workspace.yaml
+```
+
+#### Check and Fix Empty Workspace File
+```bash
+# Check if workspace file exists and is not empty
+if [ ! -s pnpm-workspace.yaml ]; then
+  echo "Workspace file is empty or missing, creating default content..."
+  cat > pnpm-workspace.yaml << 'EOF'
+packages:
+  - '.'
+EOF
+fi
+```
+
+#### Workspace Configuration Templates
+
+**Single Package Projects:**
+```yaml
+packages:
+  - '.'
+```
+
+**Monorepo Projects:**
+```yaml
+packages:
+  - 'packages/*'
+  - 'apps/*'
+  - 'examples/*'
+  - 'tools/*'
+```
+
+### 3. Set pnpm as Default Package Manager
 
 **Strong Requirement**: Always replace npm/yarn command prefixes with pnpm
 
@@ -69,45 +116,6 @@ pnpm --version
 - `yarn add` → `pnpm add`
 - `yarn run` → `pnpm run`
 
-#### Project Setup
-```bash
-# Always use pnpm for package management
-pnpm init
-pnpm add <package-name>
-pnpm install
-```
-
-### 3. Create pnpm-workspace.yaml
-
-**Strong Requirement**: Always create `pnpm-workspace.yaml` file for projects
-
-#### Basic Workspace Configuration
-Create `pnpm-workspace.yaml` in project root:
-
-```yaml
-packages:
-  - 'packages/*'
-  - 'apps/*'
-  - 'tools/*'
-```
-
-#### Single Package Workspace
-For single package projects:
-```yaml
-packages:
-  - '.'
-```
-
-#### Monorepo Workspace
-For monorepo projects:
-```yaml
-packages:
-  - 'packages/*'
-  - 'apps/*'
-  - 'examples/*'
-  - 'tools/*'
-```
-
 ## Project Initialization Workflow
 
 ### 1. New Project Setup
@@ -116,13 +124,16 @@ packages:
 mkdir my-node-project
 cd my-node-project
 
-# Create pnpm-workspace.yaml
+# STEP 1: Create pnpm-workspace.yaml (CRITICAL - DO THIS FIRST)
 echo 'packages:\n  - "."' > pnpm-workspace.yaml
 
-# Initialize package.json with pnpm
+# STEP 2: Verify workspace file exists and has content
+cat pnpm-workspace.yaml
+
+# STEP 3: Initialize package.json with pnpm
 pnpm init
 
-# Install dependencies
+# STEP 4: Install dependencies
 pnpm add <dependencies>
 pnpm add -D <dev-dependencies>
 ```
@@ -132,16 +143,19 @@ pnpm add -D <dev-dependencies>
 # Remove existing lock files
 rm package-lock.json yarn.lock
 
-# Create pnpm-workspace.yaml
+# STEP 1: Create pnpm-workspace.yaml (CRITICAL - DO THIS FIRST)
 echo 'packages:\n  - "."' > pnpm-workspace.yaml
 
-# Install with pnpm
+# STEP 2: Verify workspace file exists and has content
+cat pnpm-workspace.yaml
+
+# STEP 3: Install with pnpm
 pnpm install
 ```
 
 ## Best Practices
 
-### 1. Always Use pnpm Commands
+### 1. Command Consistency
 - Never use `npm` or `yarn` commands in pnpm projects
 - Update all documentation and scripts to use pnpm
 - Configure IDE to recognize pnpm commands
@@ -206,13 +220,63 @@ pnpm add -g pnpm@latest
 ```
 
 ### Workspace Issues
+
+#### CRITICAL: ERR_PNPM_INVALID_WORKSPACE_CONFIGURATION
+
+**MANDATORY RULE**: When encountering this error in a project that uses pnpm as the main package manager, you MUST create `pnpm-workspace.yaml` following this skill's instructions. NEVER use alternative fixes like adding `"workspaces": ["."]` to `package.json`.
+
+**Error Message:**
+```
+ERR_PNPM_INVALID_WORKSPACE_CONFIGURATION packages field missing or empty
+```
+
+**Correct Solution (Only This Method):**
 ```bash
+# ALWAYS use this exact approach - no alternatives allowed
+echo 'packages:\n  - "."' > pnpm-workspace.yaml
+
+# Verify the file exists and has content
+cat pnpm-workspace.yaml
+```
+
+**FORBIDDEN Solutions (Never Use These):**
+- ❌ Adding `"workspaces": ["."]` to package.json
+- ❌ Using npm/yarn workspace configuration
+- ❌ Skipping workspace configuration entirely
+- ❌ Using any custom fix not specified in this skill
+
+**Why This Rule is Critical:**
+- pnpm-workspace.yaml is the native pnpm configuration method
+- package.json workspaces are npm/yarn conventions that don't work properly with pnpm
+- Alternative fixes cause dependency resolution issues
+- This skill's method has been validated to work correctly
+
+#### General Workspace Troubleshooting
+```bash
+# Check if workspace file exists and is not empty
+if [ ! -s pnpm-workspace.yaml ]; then
+  echo "Workspace file is empty or missing, creating default content..."
+  cat > pnpm-workspace.yaml << 'EOF'
+packages:
+  - '.'
+EOF
+fi
+
 # Verify workspace configuration
 cat pnpm-workspace.yaml
 
 # List workspace packages
 pnpm ls --json
 ```
+
+## Rules
+
+This skill includes the following behavioral rules in the `rules/` directory:
+
+### Workspace Configuration Error (CRITICAL)
+- **Rule**: Always use pnpm-workspace.yaml for workspace configuration errors
+- **File**: `rules/workspace-configuration-error.md`
+- **Details**: Never use package.json workspaces or alternative fixes for `ERR_PNPM_INVALID_WORKSPACE_CONFIGURATION`
 
 ## Reference Source
 
@@ -223,8 +287,14 @@ https://pnpm.io/installation
 
 Before completing project setup:
 
+**CRITICAL - Must be completed FIRST:**
+- [ ] `pnpm-workspace.yaml` created in project root BEFORE any pnpm commands
+- [ ] Workspace file checked for content and fixed if empty
+- [ ] Default YAML content (`packages: - '.'`) inserted if file was empty
+- [ ] Workspace file verified with `cat pnpm-workspace.yaml` to ensure it has content
+
+**Additional Requirements:**
 - [ ] pnpm version >= 10 installed
-- [ ] `pnpm-workspace.yaml` created in project root
 - [ ] All npm/yarn commands replaced with pnpm equivalents
 - [ ] Project dependencies installed with `pnpm install`
 - [ ] Scripts updated to use `pnpm run`

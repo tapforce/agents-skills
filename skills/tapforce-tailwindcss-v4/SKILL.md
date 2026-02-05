@@ -4,7 +4,7 @@ description: Comprehensive guide for TailwindCSS v4 setup and best practices in 
 license: Apache-2.0
 metadata:
   author: tapforce
-  version: "1.0"
+  version: "1.1"
 compatibility: Requires Node.js and compatible web framework (SvelteKit, Next.js, Gatsby, React Router)
 ---
 
@@ -33,96 +33,271 @@ If TailwindCSS is not installed or is version 3.x, proceed with installation.
 
 ## Step 2: Install TailwindCSS v4
 
-Install TailwindCSS v4 and its dependencies:
+### Detect Package Manager
+First, detect which package manager your project uses:
 
 ```bash
+# Check for lock files (in order of preference)
+if [ -f "pnpm-lock.yaml" ]; then echo "pnpm";
+elif [ -f "yarn.lock" ]; then echo "yarn";
+elif [ -f "package-lock.json" ]; then echo "npm";
+else echo "pnpm"; # Default recommendation
+fi
+```
+
+### Installation Commands (Fallback Only)
+**This section should only be used when no specific framework is detected for the project.**
+
+If you cannot determine the project's framework, install TailwindCSS v4 base dependencies:
+
+```bash
+# Using pnpm (recommended)
+pnpm add -D tailwindcss@^4.0.0
+
 # Using npm
 npm install -D tailwindcss@^4.0.0
-
-# Using pnpm
-pnpm add -D tailwindcss@^4.0.0
 
 # Using yarn
 yarn add -D tailwindcss@^4.0.0
 ```
+
+**Note**: If no package manager is detected, strongly recommend using `pnpm` for better performance and disk space efficiency.
+
+**Important**: For framework-specific projects, use the installation commands provided in Step 3 for your specific framework instead.
 
 ## Step 3: Framework-Specific Setup
 
 ### SvelteKit
 Reference: https://tailwindcss.com/docs/installation/framework-guides/sveltekit
 
-1. Create or update `./src/routes/layout.css`:
+#### Option A: New Project Installation
+Follow these exact steps for a new SvelteKit project:
+
+1. **Create SvelteKit project** (if not already created):
+```bash
+npx sv create my-project
+cd my-project
+```
+
+2. **Install TailwindCSS v4 dependencies**:
+```bash
+# Using detected package manager (pnpm recommended)
+[pnpm|npm|yarn] add tailwindcss @tailwindcss/vite
+```
+
+3. **Configure Vite plugin**:
+Create/update `vite.config.js`:
+```javascript
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    sveltekit(),
+  ],
+});
+```
+
+4. **Create CSS file**:
+Create `./src/app.css`:
 ```css
 @import "tailwindcss";
-
-/* Custom configuration goes here */
-@theme {
-  /* Your custom theme configuration */
-}
 ```
 
-2. Import the CSS in your layout file:
-```javascript
-// ./src/routes/+layout.js
-import '../app.css';
+5. **Import CSS in layout**:
+Create `./src/routes/+layout.svelte`:
+```svelte
+<script>
+  let { children } = $props();
+  import "../app.css";
+</script>
+
+{@render children()}
 ```
+
+#### Option B: Update Existing Project
+If updating an existing SvelteKit project:
+
+1. **Install dependencies**:
+```bash
+[pnpm|npm|yarn] add tailwindcss @tailwindcss/vite
+```
+
+2. **Update vite.config.js** to include the tailwindcss plugin (as shown in step 3 above)
+
+3. **Create/update app.css** with `@import "tailwindcss";`
+
+4. **Ensure layout imports** the CSS file
 
 ### Next.js
 Reference: https://tailwindcss.com/docs/installation/framework-guides/nextjs
 
-1. Create or update `./app/globals.css`:
+#### Option A: New Project Installation
+Follow these exact steps for a new Next.js project:
+
+1. **Create Next.js project** (if not already created):
+```bash
+npx create-next-app@latest my-project --typescript --eslint --app
+cd my-project
+```
+
+2. **Install TailwindCSS v4 dependencies**:
+```bash
+[pnpm|npm|yarn] add tailwindcss @tailwindcss/postcss postcss
+```
+
+3. **Configure PostCSS**:
+Create `postcss.config.mjs`:
+```javascript
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+export default config;
+```
+
+4. **Create CSS file**:
+Create/update `./app/globals.css`:
 ```css
 @import "tailwindcss";
-
-/* Custom configuration goes here */
-@theme {
-  /* Your custom theme configuration */
-}
 ```
 
-2. Import in your layout:
-```javascript
-// ./app/layout.js
-import './globals.css';
+#### Option B: Update Existing Project
+If updating an existing Next.js project:
+
+1. **Install dependencies**:
+```bash
+[pnpm|npm|yarn] add tailwindcss @tailwindcss/postcss postcss
 ```
+
+2. **Create postcss.config.mjs** with the configuration (as shown in step 3 above)
+
+3. **Update globals.css** to include `@import "tailwindcss";`
 
 ### Gatsby
 Reference: https://tailwindcss.com/docs/installation/framework-guides/gatsby
 
-1. Create or update `./src/css/global.css`:
-```css
-@import "tailwindcss";
+#### Option A: New Project Installation
+Follow these exact steps for a new Gatsby project:
 
-/* Custom configuration goes here */
-@theme {
-  /* Your custom theme configuration */
+1. **Create Gatsby project** (if not already created):
+```bash
+gatsby new my-project
+cd my-project
+```
+
+2. **Install TailwindCSS v4 dependencies**:
+```bash
+[pnpm|npm|yarn] add @tailwindcss/postcss tailwindcss postcss gatsby-plugin-postcss
+```
+
+3. **Enable PostCSS plugin**:
+Update `gatsby-config.js`:
+```javascript
+module.exports = {
+  plugins: [
+    'gatsby-plugin-postcss',
+    // ... other plugins
+  ],
 }
 ```
 
-2. Import in `gatsby-browser.js`:
+4. **Configure PostCSS**:
+Create `postcss.config.js`:
 ```javascript
-// ./gatsby-browser.js
-import './src/css/global.css';
+module.exports = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
 ```
 
-### React Router
+5. **Create CSS file**:
+Create `./src/styles/global.css`:
+```css
+@import "tailwindcss";
+```
+
+6. **Import CSS in browser file**:
+Create/update `gatsby-browser.js`:
+```javascript
+import './src/styles/global.css';
+```
+
+#### Option B: Update Existing Project
+If updating an existing Gatsby project:
+
+1. **Install dependencies**:
+```bash
+[pnpm|npm|yarn] add @tailwindcss/postcss tailwindcss postcss gatsby-plugin-postcss
+```
+
+2. **Update gatsby-config.js** to include `gatsby-plugin-postcss`
+
+3. **Create postcss.config.js** with the configuration
+
+4. **Create global.css** with `@import "tailwindcss";`
+
+5. **Ensure gatsby-browser.js** imports the CSS file
+
+### React Router (Vite)
 Reference: https://tailwindcss.com/docs/installation/framework-guides/react-router
 
-1. Create or update `./src/index.css`:
+#### Option A: New Project Installation
+Follow these exact steps for a new React Router project:
+
+1. **Create React Router project** (if not already created):
+```bash
+npm create react-router@latest my-project
+cd my-project
+```
+
+2. **Install TailwindCSS v4 dependencies**:
+```bash
+[pnpm|npm|yarn] add tailwindcss @tailwindcss/vite
+```
+
+3. **Configure Vite plugin**:
+Update `vite.config.js`:
+```javascript
+import { reactRouter } from "@react-router/dev/vite";
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  plugins: [reactRouter(), tailwindcss()],
+});
+```
+
+4. **Create CSS file**:
+Create `./src/index.css`:
 ```css
 @import "tailwindcss";
-
-/* Custom configuration goes here */
-@theme {
-  /* Your custom theme configuration */
-}
 ```
 
-2. Import in your main entry point:
+5. **Import CSS in entry point**:
+Update `./src/main.jsx` or `./src/index.js`:
 ```javascript
-// ./src/main.jsx or ./src/index.js
 import './index.css';
+// ... other imports
 ```
+
+#### Option B: Update Existing Project
+If updating an existing React Router project:
+
+1. **Install dependencies**:
+```bash
+[pnpm|npm|yarn] add tailwindcss @tailwindcss/vite
+```
+
+2. **Update vite.config.js** to include the tailwindcss plugin
+
+3. **Create/update index.css** with `@import "tailwindcss";`
+
+4. **Ensure entry point imports** the CSS file
 
 ## Step 4: Configuration and Best Practices
 
@@ -240,6 +415,16 @@ Never write custom or plain CSS inline in HTML files or component files. Instead
 
 2. Run your development server and verify the styles are applied.
 
+## Migration from v3 to v4
+
+If migrating from TailwindCSS v3:
+
+1. Remove `tailwind.config.js` file (configuration now in CSS)
+2. Update CSS imports to use `@import "tailwindcss";`
+3. Move configuration to `@theme` block in CSS
+4. Update priority syntax from `!class` to `class!`
+5. Replace custom CSS with utility classes where possible
+
 ## Common Issues and Solutions
 
 ### Issue: Styles not applying
@@ -256,16 +441,6 @@ Never write custom or plain CSS inline in HTML files or component files. Instead
 - Use CSS variables for custom colors used in multiple places
 - Prefer `oklch()` color values for better color space coverage
 - Document your color palette in the main CSS file
-
-## Migration from v3 to v4
-
-If migrating from TailwindCSS v3:
-
-1. Remove `tailwind.config.js` file (configuration now in CSS)
-2. Update CSS imports to use `@import "tailwindcss";`
-3. Move configuration to `@theme` block in CSS
-4. Update priority syntax from `!class` to `class!`
-5. Replace custom CSS with utility classes where possible
 
 ## Rules
 

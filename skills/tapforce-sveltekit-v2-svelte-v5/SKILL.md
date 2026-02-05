@@ -17,12 +17,49 @@ This skill helps you set up and work with SvelteKit v2 and Svelte v5 projects, e
 
 Based on the official SvelteKit LLM documentation: https://svelte.dev/docs/kit/llms.txt
 
-## Workflow
+## When to Use
 
-### 1. Check Project Status
+- Creating new SvelteKit projects
+- Setting up SvelteKit development environment
+- Working with existing SvelteKit v2+ projects
+- Any SvelteKit-related development work
 
-First, check if SvelteKit is already installed in the current project:
+## Core Requirements
 
+### 1. Package Manager - Strong Recommendation for pnpm
+
+**Strong Recommendation**: Use `pnpm` if your project and environment support it. If available, respect and follow the `tapforce-nodejs-pnpm-v10` skill for proper pnpm setup.
+
+**Benefits of pnpm**:
+- Faster installation times
+- More efficient disk usage
+- Strict dependency management
+- Better workspace support
+
+**If pnpm is available**:
+```bash
+# Always use pnpm commands instead of npm
+pnpm --version  # Verify pnpm >= 10
+```
+
+**If pnpm is not available**:
+```bash
+# Fall back to npm
+npm --version  # Verify npm is available
+```
+
+### 2. Version Requirements
+
+**Minimum versions required:**
+- SvelteKit >= 2.0.0
+- Svelte >= 5.0.0
+- Node.js >= 18
+
+**Note:** If upgrading from older Svelte versions (< 5.0.0), manual migration is recommended as automated updates can be unstable.
+
+### 3. Project Setup Workflow
+
+#### Check Project Status
 ```bash
 # Check if package.json exists and has SvelteKit dependencies
 if [ -f "package.json" ]; then
@@ -33,47 +70,44 @@ else
 fi
 ```
 
-### 2. Version Requirements
-
-**If SvelteKit is installed:**
-Check specific versions and ensure they meet requirements:
-
+#### Verify Versions
 ```bash
+# Use pnpm if available, otherwise fall back to npm
+if command -v pnpm &> /dev/null; then
+  PKG_MANAGER="pnpm"
+else
+  PKG_MANAGER="npm"
+fi
+
 # Check SvelteKit version
-npm list @sveltejs/kit
+$PKG_MANAGER list @sveltejs/kit
 
 # Check Svelte version  
-npm list svelte
+$PKG_MANAGER list svelte
 
 # Extract version numbers for comparison
-KIT_VERSION=$(npm list @sveltejs/kit --depth=0 | grep '@sveltejs/kit' | sed 's/.*@//' | sed 's/ .*//')
-SVELTE_VERSION=$(npm list svelte --depth=0 | grep 'svelte' | sed 's/.*@//' | sed 's/ .*//')
+KIT_VERSION=$($PKG_MANAGER list @sveltejs/kit --depth=0 | grep '@sveltejs/kit' | sed 's/.*@//' | sed 's/ .*//')
+SVELTE_VERSION=$($PKG_MANAGER list svelte --depth=0 | grep 'svelte' | sed 's/.*@//' | sed 's/ .*//')
 
 echo "SvelteKit version: $KIT_VERSION"
 echo "Svelte version: $SVELTE_VERSION"
+echo "Using package manager: $PKG_MANAGER"
 ```
 
-**If versions don't match requirements (SvelteKit >= 2.0.0, Svelte >= 5.0.0):**
+#### New Project Installation
+
+**Based on official SvelteKit documentation from https://svelte.dev/docs/kit/creating-a-project**
 
 ```bash
-# Update to latest compatible versions
-npm install @sveltejs/kit@latest svelte@latest
+# Create new SvelteKit project in CURRENT DIRECTORY (not subdirectory)
+# Note: We modify the official command to create project in current directory
+npx sv create . --no-install
 
-# Or update specific versions
-npm install @sveltejs/kit@^2.0.0 svelte@^5.0.0
-
-# Verify updates
-npm list @sveltejs/kit svelte
-```
-
-### 3. Installation
-
-**If SvelteKit is not installed:**
-Create a new SvelteKit project in the current folder:
-
-```bash
+# Alternative method using SvelteKit directly
 npx sveltekit@latest create .
 ```
+
+**Important**: The above commands create the project in the **current directory** (.) rather than creating a subdirectory, which is different from the default behavior that creates a new folder.
 
 **During installation:**
 - The CLI will ask about optional packages
@@ -84,16 +118,20 @@ npx sveltekit@latest create .
   - `eslint` for linting
   - `prettier` for code formatting
 
-### 4. Project Setup
-
-After installation, ensure the project uses modern Svelte 5 features:
-
+#### Complete Setup
 ```bash
+# Use pnpm if available, otherwise fall back to npm
+if command -v pnpm &> /dev/null; then
+  PKG_MANAGER="pnpm"
+else
+  PKG_MANAGER="npm"
+fi
+
 # Install dependencies
-npm install
+$PKG_MANAGER install
 
 # Start development server
-npm run dev
+$PKG_MANAGER run dev
 ```
 
 ## Svelte 5 Development Guidelines
@@ -186,8 +224,6 @@ npm run dev
   Content
 </div>
 ```
-
-**Explanation:** Svelte 5 supports class arrays natively, making it easier to manage conditional classes and keep code readable.
 
 **Always use class-array style whenever having classes that can be switched or toggled by condition:**
 
@@ -289,10 +325,15 @@ npm run dev
 
 This skill includes the following behavioral rules in the `rules/` directory:
 
+### Package Manager Preference
+- **Rule**: Strongly prefer pnpm over npm when available
+- **File**: `rules/package-manager-preference.md`
+- **Details**: Use pnpm if environment supports it, respect tapforce-nodejs-pnpm-v10 skill
+
 ### Installation
 - **Rule**: Install SvelteKit in current directory using specific command
 - **File**: `rules/installation.md`
-- **Details**: Always use `npx sveltekit@latest create .` and let users choose optional packages
+- **Details**: Always use `npx sv create . --no-install` or `npx sveltekit@latest create .` to create project in current directory, not subdirectory
 
 ### Svelte 5 Features
 - **Rule**: Always use Svelte 5 modern features and syntax
@@ -396,7 +437,10 @@ These rules provide behavioral bias for agents using this skill and should be ap
 
 ## Migration Notes
 
-If migrating from older versions:
+**Manual Migration Recommended for Svelte < 5.0.0**
+
+If migrating from older Svelte versions, manual migration is strongly recommended as automated updates can be unstable:
+
 - Replace `export let` with `$props()` using destructuring
 - Replace `$:` with `$derived` or `$effect`
 - Replace `let` reactive statements with `$state`

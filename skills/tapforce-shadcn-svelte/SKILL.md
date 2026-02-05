@@ -38,22 +38,44 @@ Reference documentation:
 
 ## Requirements
 
+**CRITICAL**: TailwindCSS v4 is **MANDATORY** - shadcn-svelte will fail to initialize with TailwindCSS v3
+
 - **SvelteKit**: Project must use SvelteKit with Svelte 5+
-- **TailwindCSS v4**: Project must have TailwindCSS v4 ready (installed during project setup, separately, or with shadcn-svelte)
+- **TailwindCSS v4**: **REQUIRED** - Project must have TailwindCSS v4 installed and configured
+  - Default SvelteKit templates use TailwindCSS v3 and will cause initialization failures
+  - Must upgrade to v4 before attempting shadcn-svelte setup
+  - Verify v4 installation by checking `package.json` for `tailwindcss` version 4.x
 - **Clean Slate**: Project must not have shadcn-svelte implemented previously
 
 ## Pre-Setup Checking
 
-Before setting up shadcn-svelte, check if it's already implemented:
+Before setting up shadcn-svelte, perform these critical checks:
 
-1. **Check for `components.json`** file in project root
-2. **Check `package.json`** for shadcn-svelte dependencies
+### 1. Check for Existing shadcn-svelte Implementation
+- **Check for `components.json`** file in project root
+- **Check `package.json`** for shadcn-svelte dependencies
 
 If already implemented:
 - Skip setup process
 - Guide user on how to use existing shadcn-svelte components
 
-If not implemented:
+### 2. **CRITICAL**: Verify TailwindCSS v4 Installation
+- **Check `package.json`** for `tailwindcss` version 4.x
+- **Check `vite.config.ts`** or similar config file for TailwindCSS v4 configuration
+- **Verify CSS file** uses v4 syntax (`@import "tailwindcss"` instead of v3 directives)
+
+If TailwindCSS v3 is detected:
+- **STOP** - Do not proceed with shadcn-svelte setup
+- Upgrade to TailwindCSS v4 first:
+  ```bash
+  # Example upgrade commands (adjust for package manager)
+  pnpm add -D tailwindcss@4 postcss@8
+  pnpm dlx tailwindcss@4 init
+  ```
+- Update configuration files to use v4 syntax
+- Only proceed with shadcn-svelte after v4 is confirmed working
+
+If not implemented and v4 is confirmed:
 - Proceed with setup process
 
 ## Setup Process
@@ -167,6 +189,11 @@ After adding a component, import it like this:
 ## Rules
 
 This skill includes the following behavioral rules in the `rules/` directory:
+
+### TailwindCSS v4 Requirement (CRITICAL)
+- **Rule**: Always verify TailwindCSS v4 before shadcn-svelte setup
+- **File**: `rules/tailwind-v4-requirement.md`
+- **Details**: Never proceed with v3 - upgrade to v4 first to prevent setup failures
 
 ### Component Preference
 - **Rule**: Always prefer shadcn-svelte built-in components over custom implementations
