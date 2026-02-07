@@ -46,12 +46,32 @@ For SvelteKit projects, ensure these core dependencies:
 ### Recommended Additional Dependencies
 
 #### Styling Frameworks
-```bash
-# Tailwind CSS
-pnpm add -D tailwindcss postcss autoprefixer @tailwindcss/typography
 
-# shadcn-svelte
+##### Tailwind CSS ^4.0.0
+```bash
+# Install Tailwind CSS v4 with Vite plugin
+pnpm add -D tailwindcss @tailwindcss/vite
+
+# Configure vite.config.js
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    sveltekit(),
+  ],
+});
+```
+
+##### shadcn-svelte
+```bash
+# shadcn-svelte components
 pnpm add -D @shadcn/svelte clsx tailwind-merge lucide-svelte
+
+# Initialize shadcn
+pnpm dlx shadcn-svelte@latest init
 ```
 
 #### Development Tools
@@ -150,13 +170,15 @@ packages:
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
-    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/adapter-node": "^5.0.0",
     "prettier": "^3.0.0",
     "prettier-plugin-svelte": "^3.0.0",
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.0",
     "typescript": "^5.0.0",
-    "vite": "^6.0.0"
+    "vite": "^6.0.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0"
   },
   "type": "module"
 }
@@ -175,7 +197,9 @@ Pin critical dependencies for consistency:
     "@sveltejs/kit": "2.0.0"
   },
   "devDependencies": {
-    "pnpm": "10.20.0"
+    "pnpm": "10.20.0",
+    "tailwindcss": "4.0.0",
+    "@tailwindcss/vite": "4.0.0"
   }
 }
 ```
@@ -231,13 +255,39 @@ pnpm outdated
 
 ### Adding Tailwind CSS
 
+#### Tailwind CSS ^4.0.0 Setup
 ```bash
-# Install Tailwind CSS
-pnpm add -D tailwindcss postcss autoprefixer
-pnpm dlx tailwindcss init -p
+# Install Tailwind CSS v4 with Vite plugin
+pnpm add -D tailwindcss @tailwindcss/vite
 
-# Configure tailwind.config.js
-# Add Tailwind directives to app.css
+# Create CSS file
+echo '@import "tailwindcss";' > src/app.css
+
+# Update vite.config.js
+cat > vite.config.js << 'EOF'
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    sveltekit(),
+  ],
+});
+EOF
+
+# Update layout to import CSS
+cat > src/routes/+layout.svelte << 'EOF'
+<script>
+  import "../app.css";
+</script>
+
+<slot />
+EOF
+
+# Start development
+pnpm run dev
 ```
 
 ### Adding shadcn-svelte
@@ -250,7 +300,78 @@ pnpm add -D @shadcn/svelte clsx tailwind-merge lucide-svelte
 pnpm dlx shadcn-svelte@latest init
 ```
 
-### Setting up Testing
+### Tailwind CSS v4 Features
+
+### Key Changes in Tailwind CSS v4
+
+- **Vite Plugin**: Uses `@tailwindcss/vite` instead of PostCSS
+- **Simplified Setup**: No `tailwind.config.js` required for basic usage
+- **CSS Import**: Simple `@import "tailwindcss";` in CSS file
+- **Performance**: Faster build times with Vite integration
+
+### Configuration Examples
+
+#### Basic Setup
+```javascript
+// vite.config.js
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    sveltekit(),
+  ],
+});
+```
+
+#### CSS Import
+```css
+/* src/app.css */
+@import "tailwindcss";
+```
+
+#### Layout Integration
+```svelte
+<!-- src/routes/+layout.svelte -->
+<script>
+  import "../app.css";
+</script>
+
+<slot />
+```
+
+### Advanced Configuration
+
+#### Custom Theme
+```css
+/* src/app.css */
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3b82f6;
+  --font-family-sans: "Inter", system-ui, sans-serif;
+}
+
+/* Use custom theme */
+.text-primary {
+  color: theme(--color-primary);
+}
+```
+
+#### Component Styling
+```svelte
+<style lang="postcss">
+  @reference "tailwindcss";
+  
+  .custom-button {
+    @apply bg-blue-500 text-white px-4 py-2 rounded;
+  }
+</style>
+```
+
+## Setting up Testing
 
 ```bash
 # Install Vitest and SvelteKit test adapter
