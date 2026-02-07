@@ -1,6 +1,6 @@
 ---
 name: tapforce-sveltekit-v2-state
-description: Guide for implementing store strategy to gather data/state and share across component levels or pages in SvelteKit projects using Svelte context. Use when data/state becomes complex and needs centralization, or when store pattern is required.
+description: Guide for implementing store strategy to gather data/state and share across component levels or pages in SvelteKit v2 projects using Svelte context. Use when data/state becomes complex and needs centralization, or when store pattern is required.
 license: Apache-2.0
 metadata:
   author: tapforce
