@@ -144,7 +144,9 @@ packages:
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
-    "format": "prettier --plugin-search-dir . --write ."
+    "format": "prettier --plugin-search-dir . --write .",
+    "check-env": "node references/environment-check.js",
+    "validate": "node references/environment-check.js"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",

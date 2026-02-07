@@ -30,9 +30,36 @@ Ensure projects meet these minimum version requirements:
 
 ## Version Validation
 
-### Before Project Setup
+### Automated Environment Validation
 
-Always validate environment versions before starting:
+**ALWAYS** use the automated validation scripts before starting development:
+
+```bash
+# Node.js-based validation (recommended)
+node references/environment-check.js
+
+# Shell-based validation (alternative)
+./references/environment-check.sh
+```
+
+### Package Script Integration
+
+Add this script to `package.json` for easy access:
+
+```json
+{
+  "scripts": {
+    "check-env": "node references/environment-check.js",
+    "validate": "node references/environment-check.js"
+  }
+}
+```
+
+Then run: `pnpm run check-env`
+
+### Manual Validation (Fallback)
+
+If automated scripts aren't available, validate manually:
 
 ```bash
 # Check Node.js version
@@ -109,6 +136,25 @@ pnpm add svelte@5.0.0 @sveltejs/kit@2.0.0
 
 ## Troubleshooting Version Issues
 
+### Automated Validation
+
+Use the automated scripts for comprehensive troubleshooting:
+
+```bash
+# Run full environment validation
+pnpm run check-env
+
+# Or use the scripts directly
+node references/environment-check.js
+./references/environment-check.sh
+```
+
+The automated validation provides:
+- ✅ Detailed version compatibility matrix
+- ✅ Specific fix suggestions for each issue
+- ✅ Color-coded status indicators
+- ✅ Exit codes for CI/CD integration
+
 ### Common Problems
 
 1. **Node.js version too old**: Upgrade to Node.js ^20.0.0
@@ -125,4 +171,7 @@ pnpm update svelte@^5.0.0 @sveltejs/kit@^2.0.0
 # Clean install with correct versions
 rm -rf node_modules pnpm-lock.yaml
 pnpm install
+
+# Validate after fixes
+pnpm run check-env
 ```

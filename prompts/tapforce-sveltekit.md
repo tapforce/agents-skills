@@ -130,3 +130,9 @@ Official document about state management you need read from: https://svelte.dev/
 review `modern-fetures.md`. you mising case event handle 
 old version use on:<event name>  like `on:click` ,`on:submit`, etc.
 new version use `on` keyword like `onclick`, `onsubmit`, etc.
+
+-- 
+
+review `package-management.md`.
+I need you add detail tailwindcss version supported is ^4.
+You need check the install CLIs to match with official install documentation of tailwindcss on version ^4 and for sveltekit project.
