@@ -299,7 +299,7 @@ When requested to test a skill (e.g., skill A), follow these steps:
    - **Percentage of perfection** (0-100)
    - **Quality rating** (1-5 stars)
    - **Strengths**: List topics where the skill performs well
-   - **Weaknesses**: List topics where the skill performs poorly, with explanations
+   - **Weaknesses**: List topics where the skill performs poorly, with explanations. Each weakness you need explains details about the weakness in separate file included the problem, code/command actual and expected, how to fix it. Save file to `./reports/<skill-name>/weaknesses/` folder, then set reference relative path to report file.
    - **Improvements**: List topics that need improvement, with explanations
    - **Used Skills/Rules**: Names of other skills/rules used during the testing session and where they were applied
 
@@ -307,7 +307,7 @@ When requested to test a skill (e.g., skill A), follow these steps:
    - **skill name**: Name of the skill tested in history
    - **percentage**: % of perfection of the skill
    - **quality**: Quality rating of the skill (1-5 stars)
-   - **tested date**: Date of the testing session
+   - **tested datetime**: Date and time of the testing session
 
 ### Testing Best Practices
 
