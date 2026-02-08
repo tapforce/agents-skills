@@ -1,3 +1,3 @@
-test `tapforce-pnpm`
+test skill `tapforce-pnpm`
 
-test `tapforce-sveltekit`
+test skill `tapforce-sveltekit`

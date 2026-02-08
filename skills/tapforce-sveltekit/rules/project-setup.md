@@ -74,9 +74,26 @@ pnpm install  # Inconsistent
 ## Project Directory Structure
 
 After CLI setup, you should have:
-- `src/` - Source code directory
+- `src/routes/` - SvelteKit routing directory
+- `src/lib/` - Shared components and utilities
 - `static/` - Static assets
 - `package.json` - Project configuration
 - `svelte.config.js` - Svelte configuration
 - `vite.config.js` - Vite build configuration
 - `tsconfig.json` - TypeScript configuration (if applicable)
+
+### SvelteKit Routing Structure
+
+```
+src/routes/
+├── +page.svelte          # Root page
+├── about/
+│   └── +page.svelte      # About page
+├── blog/
+│   ├── [slug]/
+│   │   └── +page.svelte  # Dynamic blog post
+│   └── +page.svelte      # Blog listing
+└── api/
+    └── posts/
+        └── +server.ts    # API endpoint
+```

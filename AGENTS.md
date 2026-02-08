@@ -295,11 +295,16 @@ When requested to test a skill (e.g., skill A), follow these steps:
 
 4. **Testing File Management**: All testing files generated during a testing session must be stored in the `./testing` folder of this project. Always clear all files inside this folder before starting testing a skill and clear again after the testing session.
 
+Report file clearing: Always clear all folders and files inside `./reports/<skill-name>` folder before starting testing a skill.
+
+Report file `./reports/<skill-name>.md` must be removed before starting testing a skill.
+
 5. **Test Report Generation**: After testing a skill, generate a summary report in `./reports/<skill-name>.md`. The summary must include:
    - **Percentage of perfection** (0-100)
    - **Quality rating** (1-5 stars)
    - **Strengths**: List topics where the skill performs well
-   - **Weaknesses**: List topics where the skill performs poorly, with explanations. Each weakness you need explains details about the weakness in separate file included the problem, code/command actual and expected, how to fix it. Save file to `./reports/<skill-name>/weaknesses/` folder, then set reference relative path to report file.
+   - **Abstract vs detailed**: Review content is appropriately abstract or too detailed.
+   - **Weaknesses**: List topics where the skill performs poorly, with explanations. Each weakness you need explains details about the weakness in separate file included the problem, code/command actual and expected, how to fix it. Save file to `./reports/<skill-name>/weaknesses/` folder, then set reference relative path to report file. You MUST clear the `weaknesses` folder before starting testing a skill and clear again after the testing session.
    - **Improvements**: List topics that need improvement, with explanations
    - **Used Skills/Rules**: Names of other skills/rules used during the testing session and where they were applied
 

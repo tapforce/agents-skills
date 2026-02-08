@@ -5,7 +5,7 @@ license: ISC
 metadata:
   author: tapforce
   version: "1.0"
-compatibility: Requires Node.js ^20.0.0, Svelte ^5.0.0, SvelteKit ^2.0.0, pnpm
+compatibility: Requires Node.js ^20.0.0, Svelte ^5.0.0, SvelteKit ^2.0.0, pnpm ^10.0.0
 allowed-tools: Bash Read Write
 ---
 
@@ -26,7 +26,7 @@ Use this skill when:
 - Project based on Node.js ^20.0.0
 - Project needs Svelte ^5.0.0
 - Project needs SvelteKit ^2.0.0
-- Prefer using `pnpm` as default package manager
+- Prefer using `pnpm ^10.0.0` as default package manager
 
 ## Project Setup
 
@@ -38,6 +38,15 @@ For new projects, use the SvelteKit CLI command to initialize the backbone codeb
 
 **CLI Commands**:
 ```bash
+# Using pnpm (recommended)
+pnpm dlx sv create .
+pnpm run dev
+
+# Using npm
+npm dlx sv create .
+npm run dev
+
+# Pattern format
 <package-manager> dlx sv create .
 <package-manager> run dev
 ```
