@@ -63,8 +63,10 @@ Folder path imports support multiple scenarios:
 
 ### 1. Destructuring Imports (Preferred)
 ```typescript
-// Preferred: Import specific components
-import { Button, Input, Label } from "$lib/components/ui/button";
+// Preferred: Import specific components from their own folders
+import { Button } from "$lib/components/ui/button";
+import { Input } from "$lib/components/ui/input";
+import { Label } from "$lib/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
 ```
 
@@ -135,7 +137,7 @@ import * as Select from "$lib/components/ui/select";
 ### Group Imports by Type
 ```typescript
 // shadcn-svelte components
-import { Button, Input, Label } from "$lib/components/ui/button";
+import { Button } from "$lib/components/ui/button";
 import { Input } from "$lib/components/ui/input";
 import { Label } from "$lib/components/ui/label";
 
@@ -162,8 +164,10 @@ import { Button } from "$lib/components/ui/button";
 
 ### Multiple Components Import
 ```typescript
-// ✅ Best: Destructuring multiple components
-import { Button, Input, Label } from "$lib/components/ui/button";
+// ✅ Best: Each component from its own folder, sub-components from their parent
+import { Button } from "$lib/components/ui/button";
+import { Input } from "$lib/components/ui/input";
+import { Label } from "$lib/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
 ```
 
@@ -261,7 +265,7 @@ If you encounter circular dependency warnings:
 
 ## Best Practices Summary
 
-1. **Prefer destructuring imports**: `import { Button, Card, CardContent } from "$lib/components/ui/button"`
+1. **Prefer destructuring imports**: `import { Card, CardContent, CardHeader } from "$lib/components/ui/card"`
 2. **Use namespace imports sparingly**: Only for complex component systems with many sub-components
 3. **Group related imports**: Organize imports by type and source
 4. **Use folder paths**: Always use folder paths instead of explicit file paths
@@ -280,7 +284,7 @@ If you encounter circular dependency warnings:
 
 ## Approved Patterns
 
-- ✅ Destructuring imports: `import { Button, Card, CardContent } from "$lib/components/ui/button"`
+- ✅ Destructuring imports: `import { Card, CardContent, CardHeader } from "$lib/components/ui/card"`
 - ✅ Namespace imports for complex systems: `import * as DropdownMenu from "$lib/components/ui/dropdown-menu"`
 - ✅ Organized import groups
 - ✅ Consistent import style across the project

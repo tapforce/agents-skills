@@ -37,8 +37,8 @@ shadcn-svelte components are designed to be updated automatically when new versi
 ```svelte
 <!-- Instead of modifying the original Button component -->
 <script lang="ts">
-  import { Button as BaseButton } from "$lib/components/ui/button/index.js";
-  import { cn } from "$lib/utils.js";
+  import { Button as BaseButton } from "$lib/components/ui/button";
+  import { cn } from "$lib/utils";
   
   interface Props {
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";

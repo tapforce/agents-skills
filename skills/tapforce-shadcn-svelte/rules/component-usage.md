@@ -107,14 +107,14 @@ The Button component is a perfect example of leveraging component options:
 <script lang="ts">
   import { Input } from "$lib/components/ui/input";
   import { Label } from "$lib/components/ui/label";
-  import { Field, FieldLabel, FieldInput, FieldDescription, FieldError } from "$lib/components/ui/field";
+  import { Field, FieldLabel, FieldContent, FieldDescription, FieldError } from "$lib/components/ui/field";
 </script>
 
 <Field>
   <FieldLabel>Username</FieldLabel>
-  <FieldInput>
+  <FieldContent>
     <Input type="text" placeholder="Enter username" />
-  </FieldInput>
+  </FieldContent>
   <FieldDescription>Choose a unique username</FieldDescription>
   <FieldError>Username is required</FieldError>
 </Field>
@@ -127,26 +127,27 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "$lib/components/ui/select";
-  import { Checkbox, CheckboxBox, CheckboxLabel } from "$lib/components/ui/checkbox";
+  import * as Select from "$lib/components/ui/select";
+  import { Checkbox } from "$lib/components/ui/checkbox";
+  import { Label } from "$lib/components/ui/label";
 </script>
 
-<!-- Select with options -->
-<Select>
-  <SelectTrigger>
-    <SelectValue placeholder="Select an option" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="option1">Option 1</SelectItem>
-    <SelectItem value="option2">Option 2</SelectItem>
-  </SelectContent>
-</Select>
+<!-- Select with options (namespace import due to many sub-components) -->
+<Select.Root>
+  <Select.Trigger>
+    <Select.Label>Select an option</Select.Label>
+  </Select.Trigger>
+  <Select.Content>
+    <Select.Item value="option1">Option 1</Select.Item>
+    <Select.Item value="option2">Option 2</Select.Item>
+  </Select.Content>
+</Select.Root>
 
-<!-- Checkbox with custom styling -->
-<Checkbox class="border-2">
-  <CheckboxBox />
-  <CheckboxLabel>Accept terms</CheckboxLabel>
-</Checkbox>
+<!-- Checkbox with label -->
+<div class="flex items-center gap-2">
+  <Checkbox id="terms" class="border-2" />
+  <Label for="terms">Accept terms</Label>
+</div>
 ```
 
 ### Layout Components
@@ -183,21 +184,21 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "$lib/components/ui/navigation-menu";
+  import * as NavigationMenu from "$lib/components/ui/navigation-menu";
   import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "$lib/components/ui/dropdown-menu";
 </script>
 
-<!-- Navigation menu with variants -->
-<NavigationMenu>
-  <NavigationMenuList>
-    <NavigationMenuItem>
-      <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-      <NavigationMenuContent>
-        <NavigationMenuLink href="/product1">Product 1</NavigationMenuLink>
-      </NavigationMenuContent>
-    </NavigationMenuItem>
-  </NavigationMenuList>
-</NavigationMenu>
+<!-- Navigation menu (uses namespace import due to many sub-components) -->
+<NavigationMenu.Root>
+  <NavigationMenu.List>
+    <NavigationMenu.Item>
+      <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
+      <NavigationMenu.Content>
+        <NavigationMenu.Link href="/product1">Product 1</NavigationMenu.Link>
+      </NavigationMenu.Content>
+    </NavigationMenu.Item>
+  </NavigationMenu.List>
+</NavigationMenu.Root>
 
 <!-- Dropdown with custom trigger -->
 <DropdownMenu>

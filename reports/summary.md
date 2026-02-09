@@ -4,4 +4,4 @@
 |------------|------------|---------|-------------|
 | tapforce-pnpm | 85% | ★★★★☆ | 2025-02-07 |
 | tapforce-sveltekit | 95% | ★★★★★ | 2026-02-08 (Refreshed) |
-| tapforce-shadcn-svelte | 85% | ★★★★☆ | 2026-02-09 |
+| tapforce-shadcn-svelte | 92% | ★★★★★ | 2026-02-09 (Re-tested after fixes) |

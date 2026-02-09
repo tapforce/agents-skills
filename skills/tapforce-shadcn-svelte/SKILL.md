@@ -194,8 +194,9 @@ After adding a component, you can import it like this:
 ```
 
 **Import Guidelines:**
-- Always use destructuring imports: `import { Button, Card } from "$lib/components/ui/button"`
-- Never use namespace imports: `import * as Button from "$lib/components/ui/button"`
+- Always use destructuring imports from the component's own folder: `import { Button } from "$lib/components/ui/button"`
+- Import sub-components together from their parent: `import { Card, CardHeader, CardTitle } from "$lib/components/ui/card"`
+- Never use namespace imports for simple components: `import * as Button from "$lib/components/ui/button"`
 - Use direct component paths without `/index.js` suffix
 
 ## Theming
@@ -204,10 +205,10 @@ After adding a component, you can import it like this:
 
 shadcn-svelte uses a simple background and foreground convention for colors. The background variable is used for the background color of the component and the foreground variable is used for the text color.
 
-Given CSS variables:
+For example, given these CSS variables:
 ```css
---primary: oklch(0.205 0 0);
---primary-foreground: oklch(0.985 0 0);
+--primary: oklch(0.208 0.042 265.755);
+--primary-foreground: oklch(0.984 0.003 247.858);
 ```
 
 The background color will be `var(--primary)` and the foreground color will be `var(--primary-foreground)`:
@@ -216,76 +217,62 @@ The background color will be `var(--primary)` and the foreground color will be `
 <div class="bg-primary text-primary-foreground">Hello</div>
 ```
 
+### Generated CSS Structure
+
+The `init` command generates the full CSS structure in your global CSS file. The exact oklch values depend on the chosen base color (slate, gray, zinc, neutral, stone). The generated file includes:
+
+1. **TailwindCSS import** and **tw-animate-css** animation library
+2. **Dark mode custom variant**: `@custom-variant dark (&:is(.dark *))`
+3. **`:root` CSS variables** for light mode colors
+4. **`.dark` CSS variables** for dark mode colors
+5. **`@theme inline` block** mapping CSS variables to TailwindCSS v4 utilities
+6. **`@layer base`** block for default border and background styles
+
 ### Available CSS Variables
 
+The following variables are available (values shown are for the **slate** base color):
+
+| Variable | Purpose |
+|----------|---------|
+| `--background` / `--foreground` | Page background and text |
+| `--card` / `--card-foreground` | Card component colors |
+| `--popover` / `--popover-foreground` | Popover/dropdown colors |
+| `--primary` / `--primary-foreground` | Primary action colors |
+| `--secondary` / `--secondary-foreground` | Secondary action colors |
+| `--muted` / `--muted-foreground` | Muted/subtle content |
+| `--accent` / `--accent-foreground` | Accent/highlight colors |
+| `--destructive` | Destructive action color |
+| `--border` | Border color |
+| `--input` | Input border color |
+| `--ring` | Focus ring color |
+| `--chart-1` through `--chart-5` | Chart colors |
+| `--sidebar-*` | Sidebar-specific variants |
+| `--radius` | Base border radius |
+
+### TailwindCSS v4 Theme Mapping
+
+The init command also generates a `@theme inline` block required by TailwindCSS v4 to map CSS variables to Tailwind utility classes (e.g., `bg-primary`, `text-foreground`, `border-border`):
+
 ```css
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  /* ... maps all CSS variables to Tailwind color utilities */
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.269 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.439 0 0);
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 ```
 
