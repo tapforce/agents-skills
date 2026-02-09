@@ -28,6 +28,140 @@ Use this skill when:
 - Project needs SvelteKit ^2.0.0
 - Prefer using `pnpm ^10.0.0` as default package manager
 
+## CLI Commands
+
+### sv create
+
+Sets up a new SvelteKit project with options for templates and add-ons.
+
+**Usage**:
+```bash
+npx sv create [options] [path]
+```
+
+**Key Options**:
+- `--template <name>`: Project template (`minimal`, `demo`, `library`)
+- `--types <option>`: Type checking (`ts`, `jsdoc`)
+- `--no-types`: Skip type checking (not recommended)
+- `--add [add-ons...]`: Add specific add-ons during creation
+- `--no-add-ons`: Skip interactive add-ons prompt
+- `--install <package-manager>`: Specify package manager (`npm`, `pnpm`, `yarn`, `bun`, `deno`)
+- `--no-install`: Skip dependency installation
+- `--from-playground <url>`: Create from playground URL
+
+**Examples**:
+```bash
+# Basic setup with pnpm
+pnpm dlx sv create . --install pnpm
+
+# With TypeScript and Tailwind CSS
+pnpm dlx sv create . --types ts --add tailwindcss --install pnpm
+
+# From template with add-ons
+pnpm dlx sv create . --template demo --add eslint prettier --install pnpm
+```
+
+### sv add
+
+Updates existing projects with new functionality and add-ons.
+
+**Usage**:
+```bash
+npx sv add [add-ons]
+```
+
+**Key Options**:
+- `-C, --cwd <path>`: Path to project root
+- `--no-git-check`: Skip git dirty files check
+- `--no-download-check`: Skip download confirmations
+- `--install <package-manager>`: Specify package manager
+- `--no-install`: Skip dependency installation
+
+**Official Add-ons**:
+- `tailwindcss`: Tailwind CSS v4 integration
+- `eslint`: Code linting setup
+- `prettier`: Code formatting setup
+- `playwright`: End-to-end testing
+- `vitest`: Unit testing framework
+- `mdsvex`: Markdown support
+- And more...
+
+**Examples**:
+```bash
+# Add Tailwind CSS
+pnpm dlx sv add tailwindcss
+
+# Add multiple tools
+pnpm dlx sv add eslint prettier playwright
+
+# Add with specific package manager
+pnpm dlx sv add vitest --install pnpm
+```
+
+### sv check
+
+Finds errors and warnings in SvelteKit projects.
+
+**Usage**:
+```bash
+npx sv check [options]
+```
+
+**Key Options**:
+- `--workspace <path>`: Path to workspace directory
+- `--output <format>`: Output format (`human`, `human-verbose`, `machine`, `machine-verbose`)
+- `--watch`: Keep process alive and watch for changes
+- `--tsconfig <path>`: Path to TypeScript config
+- `--no-tsconfig`: Check only Svelte files
+- `--ignore <paths>`: Files/folders to ignore
+- `--fail-on-warnings`: Exit with error on warnings
+- `--compiler-warnings <warnings>`: Configure warning behavior
+- `--diagnostic-sources <sources>`: Specify diagnostic sources (`js`, `svelte`, `css`)
+- `--threshold <level>`: Filter diagnostics (`warning`, `error`)
+
+**Examples**:
+```bash
+# Basic check
+pnpm dlx sv check
+
+# Watch mode
+pnpm dlx sv check --watch
+
+# With specific output
+pnpm dlx sv check --output machine-verbose
+
+# Ignore specific directories
+pnpm dlx sv check --ignore "dist,build"
+```
+
+### sv migrate
+
+Migrates SvelteKit codebases between versions.
+
+**Usage**:
+```bash
+npx sv migrate [migration]
+```
+
+**Available Migrations**:
+- `svelte-5`: Upgrade Svelte 4 to Svelte 5 with runes
+- `sveltekit-2`: Upgrade SvelteKit 1 to SvelteKit 2
+- `app-state`: Migrate `$app/stores` to `$app/state`
+- `self-closing-tags`: Update self-closing element syntax
+- `svelte-4`: Upgrade Svelte 3 to Svelte 4
+- `package`: Upgrade `@sveltejs/package` v1 to v2
+- `routes`: Upgrade pre-release to v1 routing
+
+**Examples**:
+```bash
+# Interactive migration
+pnpm dlx sv migrate
+
+# Specific migration
+pnpm dlx sv migrate svelte-5
+pnpm dlx sv migrate sveltekit-2
+```
+
 ## Project Setup
 
 ### Creating New Project
@@ -36,30 +170,65 @@ For new projects, use the SvelteKit CLI command to initialize the backbone codeb
 
 **Official documentation**: https://svelte.dev/docs/kit/creating-a-project/llms.txt
 
-**CLI Commands**:
+**Quick Setup Commands**:
 ```bash
-# Using pnpm (recommended)
-pnpm dlx sv create .
+# Basic setup with pnpm (recommended)
+pnpm dlx sv create . --install pnpm
+pnpm run dev
+
+# With TypeScript and Tailwind CSS
+pnpm dlx sv create . --types ts --add tailwindcss --install pnpm
+pnpm run dev
+
+# With common development tools
+pnpm dlx sv create . --add eslint prettier vitest --install pnpm
+pnpm run dev
+
+# Minimal setup with common addons (no-install approach)
+pnpm dlx sv create . --template minimal --add tailwindcss prettier adapter-auto --no-install
+echo 'packages:
+    - .' > pnpm-workspace.yaml
+pnpm install
 pnpm run dev
 
 # Using npm
-npm dlx sv create .
+npm dlx sv create . --install npm
 npm run dev
-
-# Pattern format
-<package-manager> dlx sv create .
-<package-manager> run dev
 ```
 
-Replace `<package-manager>` with the package manager your project uses. If unknown, use `pnpm` as default.
+**Troubleshooting pnpm Setup**:
+If you encounter `ERR_PNPM_INVALID_WORKSPACE_CONFIGURATION` error during installation, see the [Package Management](rules/package-management.md) rule for solutions.
+
+**Template Options**:
+- `minimal`: Barebones scaffolding
+- `demo`: Showcase app with word guessing game
+- `library`: Template for Svelte library with `svelte-package`
+
+**Package Manager Support**:
+- `pnpm` (recommended)
+- `npm`
+- `yarn`
+- `bun`
+- `deno`
 
 ### Recommended Packages
 
 Consider using these helpful libraries for SvelteKit development:
 
 **Style Framework/UXUI Framework**:
-- tailwindcss: https://tailwindcss.com/docs/installation/framework-guides/sveltekit
+- tailwindcss ^4.0.0: https://tailwindcss.com/docs/installation/framework-guides/sveltekit
 - shadcn-svelte: https://www.shadcn-svelte.com/docs/installation/sveltekit
+
+**Testing Frameworks**:
+- vitest: Unit testing with SvelteKit support
+- playwright: End-to-end testing
+- @sveltejs/adapter-test: Testing adapter for SvelteKit
+
+**Development Tools**:
+- eslint: Code linting with Svelte plugin
+- prettier: Code formatting with Svelte plugin
+- mdsvex: Markdown support in Svelte
+- paraglide: Internationalization
 
 ## Project Configuration
 

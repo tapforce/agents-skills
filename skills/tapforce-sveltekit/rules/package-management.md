@@ -47,7 +47,7 @@ For SvelteKit projects, ensure these core dependencies:
 
 #### Styling Frameworks
 
-##### Tailwind CSS ^4.0.0
+#### Tailwind CSS ^4.0.0 Setup
 ```bash
 # Install Tailwind CSS v4 with Vite plugin
 pnpm add -D tailwindcss @tailwindcss/vite
@@ -63,7 +63,20 @@ export default defineConfig({
     sveltekit(),
   ],
 });
+
+# Create CSS file with v4 syntax
+echo '@import "tailwindcss";' > src/app.css
+
+# Import CSS in layout
+# Add import "../app.css" to src/routes/+layout.svelte
 ```
+
+**Tailwind CSS v4 Key Features**:
+- Vite plugin instead of PostCSS
+- Simplified setup with `@import "tailwindcss"`
+- No `tailwind.config.js` required for basic usage
+- Faster build times with Vite integration
+- Enhanced performance and developer experience
 
 ##### shadcn-svelte
 ```bash
@@ -260,7 +273,7 @@ pnpm outdated
 # Install Tailwind CSS v4 with Vite plugin
 pnpm add -D tailwindcss @tailwindcss/vite
 
-# Create CSS file
+# Create CSS file with v4 syntax
 echo '@import "tailwindcss";' > src/app.css
 
 # Update vite.config.js
@@ -289,6 +302,13 @@ EOF
 # Start development
 pnpm run dev
 ```
+
+**Tailwind CSS v4 Configuration**:
+- Uses Vite plugin instead of PostCSS
+- Simple CSS import: `@import "tailwindcss";`
+- No config file needed for basic setup
+- Enhanced performance with Vite integration
+- Modern CSS features and optimizations
 
 ### Adding shadcn-svelte
 
@@ -389,6 +409,68 @@ pnpm add -D vitest @sveltejs/adapter-test
 2. **Version mismatches**: Check `pnpm why <package>`
 3. **Cache issues**: Clear with `pnpm store prune`
 4. **Permission errors**: Use `pnpm install --ignore-scripts`
+
+### pnpm Workspace Configuration Error
+
+When installing SvelteKit with pnpm, you may encounter this error:
+
+```
+ERR_PNPM_INVALID_WORKSPACE_CONFIGURATION  packages field missing or empty
+```
+
+This error occurs because pnpm expects a workspace configuration when installing packages in a directory structure.
+
+#### Solution Options
+
+**Option 1: Use --no-install flag (Recommended)**
+```bash
+# Create SvelteKit project without installing dependencies
+pnpm dlx sv create . --no-install
+
+# Create pnpm workspace configuration
+echo 'packages:
+    - .' > pnpm-workspace.yaml
+
+# Install dependencies
+pnpm install
+
+# Start development
+pnpm run dev
+```
+
+**Option 2: Create workspace configuration first**
+```bash
+# Create pnpm workspace configuration before SvelteKit setup
+echo 'packages:
+    - .' > pnpm-workspace.yaml
+
+# Then install SvelteKit normally
+pnpm dlx sv create . --install pnpm
+```
+
+#### Why This Happens
+
+- pnpm requires workspace configuration for monorepo-style setups
+- SvelteKit CLI creates a project structure that pnpm interprets as needing workspace configuration
+- The `pnpm-workspace.yaml` file tells pnpm which directories contain packages
+
+#### Workspace Configuration Examples
+
+**Single Project Setup**:
+```yaml
+# pnpm-workspace.yaml
+packages:
+    - .
+```
+
+**Monorepo Setup**:
+```yaml
+# pnpm-workspace.yaml
+packages:
+    - packages/*
+    - apps/*
+    - .
+```
 
 ### Dependency Resolution
 

@@ -132,6 +132,10 @@ This skill includes the following rules:
 - **Rule**: [version-management](rules/version-management.md)
 - **Description**: Rules for strict version management and pinning strategies
 
+### Package Manager Consistency
+- **Rule**: [package-manager-consistency](rules/package-manager-consistency.md)
+- **Description**: Rules for maintaining strict package manager consistency - never switch from pnpm to other package managers
+
 ## Best Practices
 
 - Always use workspace configuration for monorepo projects

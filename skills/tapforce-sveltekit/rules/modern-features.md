@@ -54,6 +54,13 @@ description: Rules for using Svelte ^5 and SvelteKit ^2 modern features
 <div onmouseover={() => console.log('Hovered')}>Hover me</div>
 ```
 
+**Key Changes from Svelte 4**:
+- Use `onclick` instead of `on:click`
+- Use `onsubmit` instead of `on:submit`
+- Use `oninput` instead of `on:input`
+- Use `onmouseover` instead of `on:mouseover`
+- All event handlers follow the pattern `on<eventname>`
+
 #### Effects
 ```svelte
 <script>
@@ -90,13 +97,22 @@ description: Rules for using Svelte ^5 and SvelteKit ^2 modern features
 </script>
 ```
 
-#### Old Event Handling Syntax
+#### Old Event Handling Syntax (Svelte 4 and earlier)
 ```svelte
 <!-- WRONG - Legacy event syntax -->
 <button on:click={handleClick}>Click me</button>
 <form on:submit={handleSubmit}>...</form>
 <input on:input={handleInput} />
 <div on:mouseover={handleHover}>Hover me</div>
+```
+
+**Migration Pattern**:
+```svelte
+<!-- Before (Svelte 4) -->
+<button on:click={handleClick}>Click me</button>
+
+<!-- After (Svelte 5) -->
+<button onclick={handleClick}>Click me</button>
 ```
 
 #### Old Store Syntax
@@ -213,9 +229,11 @@ src/routes/
 - [ ] Use `$effect()` instead of `$:`
 - [ ] Use `$derived()` for computed values
 - [ ] Use `$inspect()` for debugging
-- [ ] Use modern event handlers (`onclick`, `onsubmit`, etc.)
-- [ ] Avoid legacy event handlers (`on:click`, `on:submit`, etc.)
-- [ ] Avoid legacy reactive statements
+- [ ] Use modern event handlers (`onclick`, `onsubmit`, `oninput`, etc.)
+- [ ] Avoid legacy event handlers (`on:click`, `on:submit`, `on:input`, etc.)
+- [ ] Avoid legacy reactive statements (`$:`)
+- [ ] Use `$props()` for component props instead of `export let`
+- [ ] Use `$bindable()` for bindable props
 
 ### SvelteKit ^2 Features
 - [ ] Use modern file-based routing
@@ -257,13 +275,17 @@ src/routes/
 
 4. **Update event handlers**:
    ```svelte
-   // Old
+   // Old (Svelte 4)
    <button on:click={handleClick}>Click</button>
    <form on:submit={handleSubmit}>...</form>
+   <input on:input={handleInput} />
+   <div on:mouseover={handleHover}>Hover</div>
    
-   // New
+   // New (Svelte 5)
    <button onclick={handleClick}>Click</button>
    <form onsubmit={handleSubmit}>...</form>
+   <input oninput={handleInput} />
+   <div onmouseover={handleHover}>Hover</div>
    ```
 
 ### Upgrading from SvelteKit ^1

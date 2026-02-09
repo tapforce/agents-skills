@@ -31,7 +31,7 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button/index.js";
+  import { Button } from "$lib/components/ui/button";
 </script>
 
 <!-- ✅ Good: Using built-in variants and sizes -->
@@ -55,7 +55,7 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import { Input } from "$lib/components/ui/input/index.js";
+  import { Input } from "$lib/components/ui/input";
 </script>
 
 <!-- ✅ Good: Using class prop for additional styling -->
@@ -76,22 +76,22 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import * as Card from "$lib/components/ui/card/index.js";
+  import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "$lib/components/ui/card";
 </script>
 
 <!-- ✅ Good: Using card components as a system -->
-<Card.Root class="w-full max-w-md">
-  <Card.Header>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Description>Card description goes here</Card.Description>
-  </Card.Header>
-  <Card.Content>
+<Card class="w-full max-w-md">
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description goes here</CardDescription>
+  </CardHeader>
+  <CardContent>
     <p>Card content</p>
-  </Card.Content>
-  <Card.Footer>
+  </CardContent>
+  <CardFooter>
     <Button>Action</Button>
-  </Card.Footer>
-</Card.Root>
+  </CardFooter>
+</Card>
 ```
 
 ## Best Practices by Component Category
@@ -105,19 +105,19 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import { Input } from "$lib/components/ui/input/index.js";
-  import { Label } from "$lib/components/ui/label/index.js";
-  import { Field } from "$lib/components/ui/field/index.js";
+  import { Input } from "$lib/components/ui/input";
+  import { Label } from "$lib/components/ui/label";
+  import { Field, FieldLabel, FieldInput, FieldDescription, FieldError } from "$lib/components/ui/field";
 </script>
 
-<Field.Root>
-  <Field.Label>Username</Field.Label>
-  <Field.Input>
+<Field>
+  <FieldLabel>Username</FieldLabel>
+  <FieldInput>
     <Input type="text" placeholder="Enter username" />
-  </Field.Input>
-  <Field.Description>Choose a unique username</Field.Description>
-  <Field.Error>Username is required</Field.Error>
-</Field.Root>
+  </FieldInput>
+  <FieldDescription>Choose a unique username</FieldDescription>
+  <FieldError>Username is required</FieldError>
+</Field>
 ```
 
 #### Selection Components
@@ -127,26 +127,26 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import * as Select from "$lib/components/ui/select/index.js";
-  import * as Checkbox from "$lib/components/ui/checkbox/index.js";
+  import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "$lib/components/ui/select";
+  import { Checkbox, CheckboxBox, CheckboxLabel } from "$lib/components/ui/checkbox";
 </script>
 
 <!-- Select with options -->
-<Select.Root>
-  <Select.Trigger>
-    <Select.Value placeholder="Select an option" />
-  </Select.Trigger>
-  <Select.Content>
-    <Select.Item value="option1">Option 1</Select.Item>
-    <Select.Item value="option2">Option 2</Select.Item>
-  </Select.Content>
-</Select.Root>
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select an option" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="option1">Option 1</SelectItem>
+    <SelectItem value="option2">Option 2</SelectItem>
+  </SelectContent>
+</Select>
 
 <!-- Checkbox with custom styling -->
-<Checkbox.Root class="border-2">
-  <Checkbox.Box />
-  <Checkbox.Label>Accept terms</Checkbox.Label>
-</Checkbox.Root>
+<Checkbox class="border-2">
+  <CheckboxBox />
+  <CheckboxLabel>Accept terms</CheckboxLabel>
+</Checkbox>
 ```
 
 ### Layout Components
@@ -158,20 +158,20 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import * as Card from "$lib/components/ui/card/index.js";
-  import { Separator } from "$lib/components/ui/separator/index.js";
+  import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "$lib/components/ui/card";
+  import { Separator } from "$lib/components/ui/separator";
 </script>
 
-<Card.Root class="col-span-2">
-  <Card.Header>
-    <Card.Title>Dashboard</Card.Title>
-  </Card.Header>
-  <Card.Content>
+<Card class="col-span-2">
+  <CardHeader>
+    <CardTitle>Dashboard</CardTitle>
+  </CardHeader>
+  <CardContent>
     <p>Welcome to your dashboard</p>
     <Separator class="my-4" />
     <p>Additional content</p>
-  </Card.Content>
-</Card.Root>
+  </CardContent>
+</Card>
 ```
 
 ### Navigation Components
@@ -183,32 +183,32 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.js";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
+  import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "$lib/components/ui/navigation-menu";
+  import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "$lib/components/ui/dropdown-menu";
 </script>
 
 <!-- Navigation menu with variants -->
-<NavigationMenu.Root>
-  <NavigationMenu.List>
-    <NavigationMenu.Item>
-      <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
-      <NavigationMenu.Content>
-        <NavigationMenu.Link href="/product1">Product 1</NavigationMenu.Link>
-      </NavigationMenu.Content>
-    </NavigationMenu.Item>
-  </NavigationMenu.List>
-</NavigationMenu.Root>
+<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuLink href="/product1">Product 1</NavigationMenuLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>
 
 <!-- Dropdown with custom trigger -->
-<DropdownMenu.Root>
-  <DropdownMenu.Trigger asChild>
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
     <Button variant="outline">Actions</Button>
-  </DropdownMenu.Trigger>
-  <DropdownMenu.Content>
-    <DropdownMenu.Item>Edit</DropdownMenu.Item>
-    <DropdownMenu.Item>Delete</DropdownMenu.Item>
-  </DropdownMenu.Content>
-</DropdownMenu.Root>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>Edit</DropdownMenuItem>
+    <DropdownMenuItem>Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
 ```
 
 ## Advanced Usage Patterns
@@ -217,35 +217,35 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button/index.js";
-  import * as Card from "$lib/components/ui/card/index.js";
-  import { Badge } from "$lib/components/ui/badge/index.js";
+  import { Button } from "$lib/components/ui/button";
+  import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "$lib/components/ui/card";
+  import { Badge } from "$lib/components/ui/badge";
 </script>
 
-<Card.Root>
-  <Card.Header class="flex items-center justify-between">
+<Card>
+  <CardHeader class="flex items-center justify-between">
     <div>
-      <Card.Title>Feature Title</Card.Title>
-      <Card.Description>Feature description</Card.Description>
+      <CardTitle>Feature Title</CardTitle>
+      <CardDescription>Feature description</CardDescription>
     </div>
     <Badge variant="secondary">New</Badge>
-  </Card.Header>
-  <Card.Content>
+  </CardHeader>
+  <CardContent>
     <p>Content goes here</p>
-  </Card.Content>
-  <Card.Footer class="flex justify-between">
+  </CardContent>
+  <CardFooter class="flex justify-between">
     <Button variant="outline">Cancel</Button>
     <Button>Save</Button>
-  </Card.Footer>
-</Card.Root>
+  </CardFooter>
+</Card>
 ```
 
 ### Responsive Design with Component Options
 
 ```svelte
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
+  import { Button } from "$lib/components/ui/button";
+  import { Input } from "$lib/components/ui/input";
 </script>
 
 <!-- Responsive button sizes -->
@@ -269,8 +269,8 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button/index.js";
-  import { cn } from "$lib/utils.js";
+  import { Button } from "$lib/components/ui/button";
+  import { cn } from "$lib/utils";
 </script>
 
 <!-- ✅ Good: Using class prop with utility classes -->
@@ -301,7 +301,7 @@ The Button component is a perfect example of leveraging component options:
 
 ```svelte
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button/index.js";
+  import { Button } from "$lib/components/ui/button";
 </script>
 
 <!-- ✅ Good: Using theme colors -->

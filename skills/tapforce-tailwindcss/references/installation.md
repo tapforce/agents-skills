@@ -89,7 +89,7 @@ npx tailwindcss -i ./src/app.css -o ./dist/output.css --watch
 **Installation:**
 ```bash
 # Create new SvelteKit project
-pnpm create svelte@latest my-project
+pnpm dlx sv create my-project --install pnpm
 cd my-project
 
 # Install Tailwind CSS

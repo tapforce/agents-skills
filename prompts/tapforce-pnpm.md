@@ -33,3 +33,11 @@ If you need create file `pnpm-workspace.yaml` you add `packages` property with v
 packages:
   - .
 ```
+
+---
+
+correct skill `tapforce-pnpm`
+
+Add a rule: Consistency package manager
+
+When you used `pnpm` mean you must keep use it for everything in project. If you meet error about package manager, try fix with your acknowledge, use skills, or stop. You never switch to other package manager.

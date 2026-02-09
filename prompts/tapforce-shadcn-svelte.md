@@ -107,3 +107,9 @@ When example show import all (use `* as <component>`), you should update to use 
   <CardContent>Content</CardContent>
 </Card>
 ```
+
+---
+
+correct the skill
+
+Add new rule: when you install, init libray, or add shadcn component, you never try to manually creating config file when meeting error. You must respect install, init, adding component via CLI commands.

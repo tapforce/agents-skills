@@ -287,11 +287,11 @@ When requested to test a skill (e.g., skill A), follow these steps:
 
 ### Testing Workflow
 
-1. **Scan Available Skills**: Scan and know all skills available in the `./skills` directory of this project.
+1. **Scan Available Skills**: You need read all skills available in folder `./skills` and know all skills available in the `./skills` directory of this project.
 
-2. **Skill Context**: Consider skills found in step 1 as your available skills for the current testing session. Use them when suitable for the current task.
+2. **Skill Context**: Consider skills found in step 1 as your available skills for the current testing session. Use skills that match your testing process when suitable for the current task.
 
-3. **Skill Usage Transparency**: When using a skill/rules, display the name of the skill/rule with a clear title so it's clear which skill is being used.
+3. **Skill Usage Transparency**: When using a skill/rules, display the name of the skill/rule with a clear title so it's clear which skill is being used. You need to show name of skill/rule if you are using, and list them on the report when finish testing.
 
 4. **Testing File Management**: All testing files generated during a testing session must be stored in the `./testing` folder of this project. Always clear all files inside this folder before starting testing a skill and clear again after the testing session.
 

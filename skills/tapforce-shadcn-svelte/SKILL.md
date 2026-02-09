@@ -103,13 +103,6 @@ If the file exists, shadcn-svelte is already configured in the project.
 
 Project requires SvelteKit ^2 and TailwindCSS ^4 ready before initializing shadcn-svelte.
 
-### Create New SvelteKit Project with TailwindCSS
-
-```bash
-pnpm dlx sv create my-app --add tailwindcss
-cd my-app
-```
-
 ### Initialize shadcn-svelte
 
 ```bash
@@ -199,6 +192,11 @@ After adding a component, you can import it like this:
 
 <Button>Click me</Button>
 ```
+
+**Import Guidelines:**
+- Always use destructuring imports: `import { Button, Card } from "$lib/components/ui/button"`
+- Never use namespace imports: `import * as Button from "$lib/components/ui/button"`
+- Use direct component paths without `/index.js` suffix
 
 ## Theming
 
@@ -305,7 +303,6 @@ Import the ModeWatcher component and use it in your root layout:
 
 ```svelte
 <script lang="ts">
-  import "../app.css";
   import { ModeWatcher } from "mode-watcher";
   let { children } = $props();
 </script>
@@ -378,3 +375,7 @@ This skill includes the following rules:
 ### [Component Imports]
 - **Rule**: [component-imports](rules/component-imports.md)
 - **Description**: Best practices for importing shadcn-svelte components using folder paths for maximum compatibility
+
+### [CLI Usage]
+- **Rule**: [cli-usage](rules/cli-usage.md)
+- **Description**: Always use CLI commands for installation, initialization, and adding components - never manually create config files

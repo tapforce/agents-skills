@@ -139,3 +139,63 @@ I need you add detail tailwindcss version supported is ^4.
 You need check the install CLIs to match with official install documentation of tailwindcss on version ^4 and for sveltekit project.
 
 You need make sure snippets and examples use tailwindcss^4 features/coding style. No mention or give alternative about tailwindcss^3 features/coding style.
+
+-- 
+
+update skill `tapforce-sveltekit`.
+
+you need read and understand cli command and their arguments following links:
+
+- [sv create]: https://svelte.dev/docs/cli/sv-create
+- [sv add]: https://svelte.dev/docs/cli/sv-add
+- [sv check]: https://svelte.dev/docs/cli/sv-check
+- [sv migrate]: https://svelte.dev/docs/cli/sv-migrate
+
+Write detail about each cli command and their arguments in section `cli` and also check `project-setup.md`. Remember check duplicated content.
+
+Update section install project, mention that you can also use argument on command to quick setup project use template, or addons when you predicted or known what template/addons need to install along with sveltekit.
+
+--- 
+
+update skill `tapforce-sveltekit`
+
+at section install, when meet error with message:
+
+```ERR_PNPM_INVALID_WORKSPACE_CONFIGURATION  packages field missing or empty```
+
+That's mean we are installing sveltekit use `pnpm`, but missing `pnpm config`. 
+
+We can:
+- option 1: insstall `sveltekit` with `--no-install` arg, that's mean we set up code base but not run install. After command finish, you need create `pnpm-workspace.yaml` with content
+
+```yaml
+packages:
+    - .
+```
+
+then run `pnpm i` to install package.
+
+--- 
+
+update skill `tapforce-sveltekit`
+
+at section install, when install sveltekit as new project (empty folder), you can install svelte kit with addons:
+
+- tailwindcss
+- prettier
+- adapter auto
+- tempalte minimal.
+- no-install arg
+- use `pnpm`
+
+---
+
+correct skill `tapforce-sveltekit`
+
+fix the section `install`. you MUST use latest command cli described.
+
+`pnpm dlx sv create`
+
+the command 
+
+`pnpm create svelte@latest` is deprecated.
