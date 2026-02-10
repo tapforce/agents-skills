@@ -1,106 +1,122 @@
 # Test Report: tapforce-shadcn-svelte
 
-**Skill Version**: 1.0
-**Tested Date**: 2026-02-09
-**Re-tested Date**: 2026-02-09 (after fixes)
-**shadcn-svelte Version Tested**: 1.1.1
-**SvelteKit Version**: 2.50.2
-**Svelte Version**: 5.49.2
-**TailwindCSS Version**: 4.1.18
+## Summary
 
----
+- **Percentage of Perfection**: 78%
+- **Quality Rating**: ★★★★☆ (4/5)
+- **Test Date**: 2025-02-10
+- **Tested Version**: 1.0
 
-## Percentage of Perfection: 92%
+## Skills Used During Testing
 
-## Quality Rating: ⭐⭐⭐⭐⭐ (5/5)
+| Skill/Rule | Used For |
+|---|---|
+| **tapforce-shadcn-svelte** (SKILL.md) | Primary skill under test — installation, CLI usage, component imports, theming |
+| **tapforce-shadcn-svelte** / cli-usage | Guided CLI-based init and component addition |
+| **tapforce-shadcn-svelte** / component-imports | Guided destructuring import patterns |
+| **tapforce-shadcn-svelte** / component-usage | Guided use of component options (variant, size, class) |
+| **tapforce-shadcn-svelte** / component-maintenance | Guided wrapper component patterns (not directly tested but reviewed) |
+| **tapforce-sveltekit** (SKILL.md) | SvelteKit project creation with `sv create` |
+| **tapforce-sveltekit** / project-setup | CLI-based project setup, never manually creating core files |
+| **tapforce-sveltekit** / package-management | pnpm workspace setup, dependency management, TailwindCSS v4 integration |
+| **tapforce-pnpm** (SKILL.md) | pnpm command consistency, workspace configuration |
+| **tapforce-pnpm** / workspace-setup | Created `pnpm-workspace.yaml` before running `pnpm install` |
+| **tapforce-pnpm** / command-consistency | Used `pnpm` consistently for all commands |
+| **tapforce-tailwindcss** (SKILL.md) | TailwindCSS v4 setup validation, utility-first styling |
 
----
+## Test Scenario
 
-## Test Summary
+Built a multi-page website with SvelteKit + shadcn-svelte containing:
+- **Welcome page** (home): Hero section with Button components, feature Cards
+- **About page**: Card-based content sections with Separator
+- **Contact page**: Form with Input, Label, Textarea, Button components
+- **Shared Navbar**: Button-based navigation with active state detection
+- **Shared Footer**: Multi-column layout with Separator, Button links
 
-A complete SvelteKit website was built following the skill's instructions, consisting of a Welcome page, About page, Contact page, and a shared layout with navigation header and footer. Components used: Button, Card, Input, Label, Separator, Textarea, Badge. The project built and rendered successfully with zero errors.
+## Test Results
 
-### Re-test (Post-Fix) Summary
+### Installation & Setup
 
-All 5 weaknesses identified in the initial test were fixed directly in the skill source files. A fresh SvelteKit project was created and built from scratch following the corrected skill documentation. All import patterns, component exports, CLI commands, and CSS variable documentation now match the actual shadcn-svelte v1.1.1 behavior. Build completed with zero errors.
+| Step | Result | Notes |
+|---|---|---|
+| SvelteKit project creation via CLI | ✅ Pass | `pnpm dlx sv create` worked correctly |
+| TailwindCSS v4 addition via `sv add` | ✅ Pass | Added via CLI as recommended |
+| pnpm workspace setup | ✅ Pass | `pnpm-workspace.yaml` created before install |
+| shadcn-svelte init via CLI | ✅ Pass | `pnpm dlx shadcn-svelte@latest init` with options |
+| Component addition via CLI | ✅ Pass | Added button, card, input, label, separator, navigation-menu, textarea |
+| Dependency installation | ✅ Pass | All shadcn deps installed correctly |
+| Production build | ✅ Pass | Zero errors, all pages compiled |
 
----
+### Component Usage
+
+| Component | Used In | Import Pattern | Options Used | Result |
+|---|---|---|---|---|
+| Button | All pages, Navbar, Footer | ✅ Destructuring | variant, size, href, class | ✅ Pass |
+| Card, CardHeader, CardTitle, CardDescription, CardContent | Welcome, About, Contact | ✅ Destructuring | class | ✅ Pass |
+| Input | Contact | ✅ Destructuring | type, placeholder, id | ✅ Pass |
+| Label | Contact | ✅ Destructuring | for | ✅ Pass |
+| Textarea | Contact | ✅ Destructuring | placeholder, class, id | ✅ Pass |
+| Separator | All pages, Footer | ✅ Destructuring | class | ✅ Pass |
+
+### Skill Rule Compliance
+
+| Rule | Compliance | Details |
+|---|---|---|
+| **cli-usage** | ✅ Full | All init and add operations done via CLI, never manually created config files |
+| **component-imports** | ✅ Full | All imports use destructuring from folder paths (e.g., `import { Button } from "$lib/components/ui/button"`) |
+| **component-usage** | ✅ Full | Leveraged built-in variants (default, outline, ghost, link, secondary), sizes (sm, lg), and class prop |
+| **component-maintenance** | ✅ Full | No shadcn components were directly modified; custom components (Navbar, Footer) wrap shadcn components |
 
 ## Strengths
 
-1. **Comprehensive component list**: The SKILL.md provides a thorough listing of all available shadcn-svelte components with links to official documentation.
+1. **Clear installation instructions**: The skill provides a complete, step-by-step installation flow that works reliably with SvelteKit and TailwindCSS prerequisites.
+2. **CLI-first approach**: The cli-usage rule strongly enforces using CLI commands, which prevented configuration errors during setup.
+3. **Import pattern guidance**: The component-imports rule is thorough with clear ✅/❌ examples that make it easy to follow the correct pattern.
+4. **Component options documentation**: The component-usage rule provides excellent examples of leveraging built-in variants, sizes, and the class prop.
+5. **Theming documentation**: CSS variables convention and TailwindCSS v4 theme mapping are well-documented with the full generated CSS structure.
+6. **Dark mode support**: Clear instructions for mode-watcher integration with both simple toggle and dropdown menu examples.
+7. **Available components list**: Comprehensive list of all available components with links to documentation.
+8. **Compatibility requirements**: Clear statement of SvelteKit ^2.0, Svelte ^5.0, and TailwindCSS ^4 requirements.
 
-2. **CLI-first approach (cli-usage rule)**: The rule correctly emphasizes using CLI commands for initialization and component installation, and the actual `pnpm dlx shadcn-svelte@latest init` and `add` commands work correctly with the documented options.
+## Weaknesses
 
-3. **Clear init configuration options**: The installation section documents all CLI flags clearly (`--base-color`, `--css`, aliases, etc.), making non-interactive setup possible.
+1. **CSS file path ambiguity**: The skill documents `src/routes/layout.css` as the global CSS path in the init configuration, but this path depends on how TailwindCSS was set up. If TailwindCSS creates `src/app.css` instead, the init command fails. The skill should clarify that the CSS path must match the existing TailwindCSS setup.
 
-4. **Accurate CSS variables documentation**: The theming section now accurately documents the CSS variable values generated by `init --base-color slate`, including the `@theme inline` block, `@import "tw-animate-css"`, `@custom-variant dark` directive, and `@layer base` styles.
+2. **Missing dependency list after `--no-deps`**: When using `--no-deps` flag during init, the skill doesn't explicitly list which dependencies need to be installed manually (tailwind-variants, @lucide/svelte, tw-animate-css, clsx, tailwind-merge). This information only appears in CLI output.
 
-5. **Dark mode guidance**: The mode-watcher integration instructions with both simple toggle and dropdown menu examples are practical and well-structured.
+3. **No explicit SvelteKit prerequisite setup guide**: The skill says "Project requires SvelteKit ^2 and TailwindCSS ^4 ready before initializing" but doesn't link to or reference the tapforce-sveltekit skill for setup. Cross-skill references would improve the workflow.
 
-6. **Component-usage rule**: Good guidance on leveraging built-in variants (`variant`, `size`, `class` props) with accurate component export names and proper namespace import patterns for complex components.
+4. **Component usage rule has an import error in example**: In the cli-usage rule line 139, the example shows `import { Button, Card, Input } from "$lib/components/ui/button"` which incorrectly imports Card and Input from the button folder. This is misleading.
 
-7. **Component-maintenance rule**: The core principle of not modifying shadcn components directly is sound and well-explained, with import examples now consistent with the component-imports rule.
+5. **No troubleshooting for version mismatch**: The skill doesn't cover what happens when shadcn-svelte version doesn't match the installed Svelte/SvelteKit versions, or how to handle version conflicts.
 
-8. **Consistent import patterns across rules**: All rules now use folder-path imports (e.g., `from "$lib/components/ui/button"`) without `/index.js` suffixes, and each component is imported from its own folder.
+6. **Namespace import guidance could be clearer**: The component-imports rule says namespace imports are "acceptable" for complex component systems but the component-usage rule shows `DropdownMenu` with destructuring imports. This inconsistency could confuse users.
 
-9. **Verified component exports**: All component import examples (Select, Checkbox, Field, NavigationMenu, DropdownMenu) now use verified export names matching actual shadcn-svelte v1.1.1 output.
+7. **Missing `mode-watcher` in prerequisites**: The dark mode section recommends `mode-watcher` but it's not listed in the installation prerequisites or dependency list.
 
-10. **Successful build**: Following the skill's instructions, the project built and ran without errors on both initial and re-test runs.
+## Abstract vs Detailed Assessment
 
----
+The skill content is **appropriately balanced** between abstract guidance and concrete details:
 
-## Fixed Weaknesses (from initial test)
+- **Well-abstracted**: Core principles, import patterns, and maintenance guidelines are stated as clear rules without over-specifying implementation details.
+- **Appropriately detailed**: CLI commands, component options, and CSS variable tables provide necessary specifics that an AI agent needs to execute correctly.
+- **Could be more abstract**: The component-usage rule at 335 lines is quite long with many code examples. Some examples could be moved to a references/ directory to keep the rule more focused.
+- **Could be more detailed**: The installation section could benefit from a complete end-to-end workflow example showing the full sequence from empty directory to working project.
 
-### 1. ~~Incorrect Multi-Component Import Examples~~ (FIXED)
-- **Details**: [incorrect-multi-component-import](tapforce-shadcn-svelte/weaknesses/incorrect-multi-component-import.md)
-- **Fix**: All import examples in `component-imports.md` now correctly import each component from its own folder path. Fixed 4 locations where Button, Input, Label were incorrectly imported from a single path.
+## Recommendations
 
-### 2. ~~Rule Contradiction: index.js File Path~~ (FIXED)
-- **Details**: [rule-contradiction-index-js](tapforce-shadcn-svelte/weaknesses/rule-contradiction-index-js.md)
-- **Fix**: Changed `component-maintenance.md` imports from `"$lib/components/ui/button/index.js"` and `"$lib/utils.js"` to folder paths `"$lib/components/ui/button"` and `"$lib/utils"`, consistent with the `component-imports` rule.
+1. **Fix the import error** in cli-usage rule line 139 — each component should import from its own folder.
+2. **Add cross-skill references** to tapforce-sveltekit and tapforce-pnpm for prerequisite setup.
+3. **Document manual dependency list** when using `--no-deps` flag.
+4. **Clarify CSS file path** depends on TailwindCSS setup method.
+5. **Move lengthy code examples** from component-usage rule to a references/ directory.
+6. **Add a complete end-to-end workflow** example in the main SKILL.md.
+7. **Standardize namespace vs destructuring** guidance across rules.
 
-### 3. ~~CSS Variables Do Not Match Actual Init Output~~ (FIXED)
-- **Details**: [css-variables-mismatch](tapforce-shadcn-svelte/weaknesses/css-variables-mismatch.md)
-- **Fix**: Replaced incorrect achromatic oklch values with actual slate base color values. Added documentation for `@theme inline` block, `@import "tw-animate-css"`, `@custom-variant dark` directive, and `@layer base` styles.
+## Files Generated During Testing
 
-### 4. ~~NavigationMenu Export Name Does Not Exist~~ (FIXED)
-- **Details**: [navigation-menu-wrong-export](tapforce-shadcn-svelte/weaknesses/navigation-menu-wrong-export.md)
-- **Fix**: Changed NavigationMenu examples to use namespace import pattern `import * as NavigationMenu from "$lib/components/ui/navigation-menu"` with `<NavigationMenu.Root>` usage.
-
-### 5. ~~Unverified Component Sub-Exports~~ (FIXED)
-- **Details**: [unverified-component-exports](tapforce-shadcn-svelte/weaknesses/unverified-component-exports.md)
-- **Fix**: Verified and corrected all component exports. Changed `FieldInput` to `FieldContent`, Select to namespace import pattern, removed fake `CheckboxBox`/`CheckboxLabel` exports and replaced with `Checkbox` + separate `Label`.
-
----
-
-## Remaining Minor Observations
-
-1. **No live verification of all 88 listed components**: Only a subset of components were tested. The component list links are assumed correct based on official shadcn-svelte docs.
-
-2. **`mode-watcher` instructions not build-tested**: Dark mode toggle examples were reviewed but not included in the test build since mode-watcher is an optional addition.
-
----
-
-## Improvements Applied
-
-1. **All import examples verified** against actual installed component `index.ts` files.
-2. **Internal rule consistency achieved**: All rules now use the same import patterns (folder paths, no `/index.js`).
-3. **CSS variables section rewritten** with actual slate base color values and complete documentation of generated CSS structure.
-4. **Namespace imports recommended** for complex components (NavigationMenu, Select) to avoid export name guessing.
-5. **SKILL.md import guidelines updated** to explicitly state each component must be imported from its own folder.
-
----
-
-## Used Skills/Rules
-
-| Skill/Rule | Where Applied |
-|-----------|---------------|
-| **tapforce-sveltekit** (skill) | SvelteKit project creation with `sv create`, project structure, routing |
-| **tapforce-pnpm** (skill) | pnpm workspace setup, dependency installation, command consistency |
-| **tapforce-tailwindcss** (skill) | TailwindCSS v4 installation and Vite plugin configuration |
-| **tapforce-shadcn-svelte** (skill) | shadcn-svelte initialization and overall setup |
-| **tapforce-shadcn-svelte / cli-usage** (rule) | CLI commands for init and adding components |
-| **tapforce-shadcn-svelte / component-imports** (rule) | Import patterns for components (destructuring, folder paths) |
-| **tapforce-shadcn-svelte / component-usage** (rule) | Using component variants, sizes, class props, composition |
-| **tapforce-shadcn-svelte / component-maintenance** (rule) | Not modifying installed shadcn components directly |
+All testing files stored in `./testing/` directory:
+- SvelteKit project with shadcn-svelte
+- Pages: welcome (+page.svelte), about, contact
+- Components: Navbar.svelte, Footer.svelte
+- shadcn-svelte components: button, card, input, label, separator, navigation-menu, textarea

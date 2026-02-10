@@ -313,6 +313,7 @@ Report file `./reports/<skill-name>.md` must be removed before starting testing 
    - **percentage**: % of perfection of the skill
    - **quality**: Quality rating of the skill (1-5 stars)
    - **tested datetime**: Date and time of the testing session
+   - **AI model**: Name of AI model used to test the skill
 
 ### Testing Best Practices
 
